@@ -1,0 +1,21 @@
+#include <igraph.h>
+#include <string>
+
+namespace {
+
+% STIMULUS: functions %
+}
+
+#ifdef __EMSCRIPTEN__
+
+#include <emscripten/bind.h>
+
+using namespace emscripten;
+
+EMSCRIPTEN_BINDINGS(IGraph) {
+
+% STIMULUS: bind %
+
+}
+
+#endif

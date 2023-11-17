@@ -1,0 +1,23 @@
+igraph_weighted_sparsemat:
+    IGNORE: JS
+
+igraph_write_graph_ncol:
+    IGNORE: JS
+
+igraph_write_graph_lgl:
+    IGNORE: JS
+
+igraph_write_graph_leda:
+    IGNORE: JS
+
+igraph_write_graph_gml:
+    IGNORE: JS
+
+igraph_progress:
+    IGNORE: JS
+
+igraph_status:
+    IGNORE: JS
+
+igraph_version:
+    IGNORE: JS

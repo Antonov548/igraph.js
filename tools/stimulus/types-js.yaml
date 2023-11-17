@@ -1,0 +1,11 @@
+CSTRING:
+    CALL: '%C%.c_str()'
+    CTYPE: std::string
+
+GRAPH:
+    CTYPE: igraph_t*
+
+DEPRECATED:
+    CALL: {}
+    CTYPE: ~
+    HEADER: {}
