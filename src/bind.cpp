@@ -3,9 +3,9 @@
 
 namespace {
 
-::igraph_error_t famous(igraph_t* graph, std::string name) { 
+igraph_error_t famous(igraph_t* graph, std::string name) {
   return igraph_famous(graph, name.c_str());
-} 
+}
 
 }
 
@@ -16,7 +16,6 @@ namespace {
 using namespace emscripten;
 
 EMSCRIPTEN_BINDINGS(IGraph) {
-
   function("empty", &igraph_empty, allow_raw_pointers());
   function("add_edges", &igraph_add_edges, allow_raw_pointers());
   function("add_vertices", &igraph_add_vertices, allow_raw_pointers());
@@ -463,7 +462,6 @@ EMSCRIPTEN_BINDINGS(IGraph) {
   function("expand_path_to_pairs", &igraph_expand_path_to_pairs, allow_raw_pointers());
   function("invalidate_cache", &igraph_invalidate_cache, allow_raw_pointers());
   function("vertex_path_from_edge_path", &igraph_vertex_path_from_edge_path, allow_raw_pointers());
-
 }
 
 #endif

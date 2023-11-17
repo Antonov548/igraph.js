@@ -13,9 +13,7 @@ namespace {
 using namespace emscripten;
 
 EMSCRIPTEN_BINDINGS(IGraph) {
-
 % STIMULUS: bind %
-
 }
 
 #endif
