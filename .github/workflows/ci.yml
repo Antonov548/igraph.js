@@ -20,7 +20,7 @@ jobs:
         docker cp ${{ github.workspace }}/. emscripten:/src
         docker exec emscripten emcc -v
         docker exec emscripten apt-get update
-        docker exec emscripten apt-get install -y libglpk-dev libgmp-dev libarpack2-dev
+        docker exec emscripten apt-get install -y cmake flex bison libglpk-dev libgmp-dev libarpack2-dev python3-venv
         docker exec emscripten cp /src/tools/IGRAPH_VERSION /src/vendor/igraph
         docker exec emscripten mkdir build
         docker exec -w /src/build emscripten emcmake cmake .. -DCMAKE_BUILD_TYPE=Release
