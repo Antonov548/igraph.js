@@ -18,7 +18,7 @@ jobs:
     - run: |
         docker run -di --rm --name emscripten emscripten/emsdk:3.1.49 bash
         docker cp ${{ github.workspace }}/. emscripten:/src
-        docker exec git --version
+        docker exec emscripten git --version
         docker exec emscripten emcc -v
         docker exec emscripten mkdir build
         docker exec -w /src/build emscripten emcmake cmake .. -DCMAKE_BUILD_TYPE=Release
