@@ -42,7 +42,7 @@ igraph_vector_int_t create_vector(val arr) {
 IGRAPH_VECTOR_EMCC(from)
 IGRAPH_VECTOR_EMCC(to)
 
-EMSCRIPTEN_BINDINGS(IGraph)
+EMSCRIPTEN_BINDINGS(IGraphTypes)
 {
   class_<igraph_t>("graph").
     constructor().
@@ -51,12 +51,17 @@ EMSCRIPTEN_BINDINGS(IGraph)
     property("from", &get_from).
     property("to", &get_to);
 
-  class_<igraph_vector_int_t>("intVector").
+  class_<igraph_vector_int_t>("vector_int").
     constructor().
     constructor(&create_vector, allow_raw_pointers()).
-    property("begin", &get_vector);
+    property("data", &get_vector);
 
-  enum_<igraph_error_type_t>("igraph_error");
+  enum_<igraph_error_type_t>("error");
+
+  enum_<igraph_neimode_t>("neimode").
+    value("OUT", IGRAPH_OUT).
+    value("IN", IGRAPH_IN).
+    value("ALL", IGRAPH_ALL);
 
   function("destroy", &igraph_destroy, allow_raw_pointers());
 }

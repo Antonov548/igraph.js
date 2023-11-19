@@ -3,6 +3,18 @@
 
 namespace {
 
+igraph_error_t add_edges(igraph_t* graph, igraph_vector_int_t* edges, uintptr_t attr) {
+  return igraph_add_edges(graph, edges, reinterpret_cast<void*>(attr));
+}
+
+igraph_error_t add_vertices(igraph_t* graph, igraph_integer_t nv, uintptr_t attr) {
+  return igraph_add_vertices(graph, nv, reinterpret_cast<void*>(attr));
+}
+
+igraph_error_t empty_attrs(igraph_t* graph, igraph_integer_t n, igraph_bool_t directed, uintptr_t attr) {
+  return igraph_empty_attrs(graph, n, directed, reinterpret_cast<void*>(attr));
+}
+
 igraph_error_t famous(igraph_t* graph, std::string name) {
   return igraph_famous(graph, name.c_str());
 }
@@ -15,10 +27,10 @@ igraph_error_t famous(igraph_t* graph, std::string name) {
 
 using namespace emscripten;
 
-EMSCRIPTEN_BINDINGS(IGraph) {
+EMSCRIPTEN_BINDINGS(IGraphBind) {
   function("empty", &igraph_empty, allow_raw_pointers());
-  function("add_edges", &igraph_add_edges, allow_raw_pointers());
-  function("add_vertices", &igraph_add_vertices, allow_raw_pointers());
+  function("add_edges", &add_edges, allow_raw_pointers());
+  function("add_vertices", &add_vertices, allow_raw_pointers());
   function("copy", &igraph_copy, allow_raw_pointers());
   function("delete_edges", &igraph_delete_edges, allow_raw_pointers());
   function("delete_vertices", &igraph_delete_vertices, allow_raw_pointers());
@@ -30,7 +42,7 @@ EMSCRIPTEN_BINDINGS(IGraph) {
   function("degree", &igraph_degree, allow_raw_pointers());
   function("edge", &igraph_edge, allow_raw_pointers());
   function("edges", &igraph_edges, allow_raw_pointers());
-  function("empty_attrs", &igraph_empty_attrs, allow_raw_pointers());
+  function("empty_attrs", &empty_attrs, allow_raw_pointers());
   function("get_eid", &igraph_get_eid, allow_raw_pointers());
   function("get_eids", &igraph_get_eids, allow_raw_pointers());
   function("get_all_eids_between", &igraph_get_all_eids_between, allow_raw_pointers());

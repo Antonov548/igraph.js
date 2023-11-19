@@ -2,6 +2,13 @@ CSTRING:
     CALL: '%C%.c_str()'
     CTYPE: std::string
 
+ATTRIBUTES:
+    CALL: 'reinterpret_cast<void*>(%C%)'
+    CTYPE: uintptr_t
+
+VERTEX_INDEX_PAIRS:
+    CTYPE: igraph_vector_int_t*
+
 GRAPH:
     CTYPE: igraph_t*
 

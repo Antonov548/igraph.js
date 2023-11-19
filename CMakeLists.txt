@@ -8,7 +8,16 @@ project(
   LANGUAGES C CXX
 )
 
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/")
+include(Misc)
+
+option(ENABLE_TESTS "Enable tests" ON)
+
 set(IGRAPH_INTEGER_SIZE 32)
 add_subdirectory(vendor/igraph)
 
 add_subdirectory(src)
+
+if (ENABLE_TESTS)
+  add_subdirectory(tests)
+endif()

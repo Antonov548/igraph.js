@@ -12,7 +12,7 @@ namespace {
 
 using namespace emscripten;
 
-EMSCRIPTEN_BINDINGS(IGraph) {
+EMSCRIPTEN_BINDINGS(IGraphBind) {
 % STIMULUS: bind %
 }
 
