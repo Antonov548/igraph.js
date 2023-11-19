@@ -17,6 +17,7 @@ set_target_properties(
     CXX_EXTENSIONS NO
     LINK_FLAGS ${IGRAPH_EMCC_FLAGS}
     OUTPUT_NAME "igraph"
+    RUNTIME_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR}
 )
 
 target_link_libraries(${EMSCRIPTEN_TARGET_NAME} PUBLIC igraph)

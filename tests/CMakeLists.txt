@@ -3,9 +3,10 @@ find_program(NPM_EXECUTABLE npm REQUIRED)
 if(NPM_EXECUTABLE)
     message(STATUS "npm found: ${NPM_EXECUTABLE}")
 
-    # Example: Run npm install as a part of the build process
     add_custom_target(
         test
+        COMMAND ${CMAKE_COMMAND} -E copy ${PROJECT_BINARY_DIR}/igraph.js ${CMAKE_CURRENT_SOURCE_DIR}
+        COMMAND ${CMAKE_COMMAND} -E copy ${PROJECT_BINARY_DIR}/igraph.wasm ${CMAKE_CURRENT_SOURCE_DIR}
         COMMAND ${NPM_EXECUTABLE} install
         COMMAND ${NPM_EXECUTABLE} test
         WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/tests
