@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "format": "prettier --write \"/**/*.{js,ts,html}\"",
+    "format": "prettier --write \"./**.{js,ts,html}\"",
     "test": "jest --detectOpenHandles"
   },
   "devDependencies": {
