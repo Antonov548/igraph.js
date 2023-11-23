@@ -1,6 +1,6 @@
 # igraph.js
 
-igraph.js is an js/wasm interface of the igraph network analysis library.
+igraph.js is an JavaScript interface of the igraph network analysis library compiled to WebAssembly using Emscripten.
 
 ## Build
 
