@@ -9,5 +9,5 @@ You can build project using `emcmake` from `emsdk`:
 > mkdir build && cd build
 > emcmake cmake ..
 > make
-> make test # Makes and runs tests with node.js
+> make test # Makes and runs tests using node.js
 ```
