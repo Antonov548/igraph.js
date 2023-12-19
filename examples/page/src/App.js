@@ -39,7 +39,7 @@ export function App() {
   ].sort((l, r) => l.name.localeCompare(r.name));
 
   useEffect(() => {
-    const igraph = loadModule({
+    loadModule({
       locateFile: () => require('./igraph.wasm'),
     }).then((module) => {
       setIgraph(module);
