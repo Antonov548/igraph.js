@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.css": "/static/css/main.d140aa3c.css",
-    "main.js": "/static/js/main.285269fd.js",
-    "static/media/igraph.wasm": "/static/media/igraph.7e4491415ecc4f65e0c7.wasm",
-    "index.html": "/index.html",
-    "main.d140aa3c.css.map": "/static/css/main.d140aa3c.css.map",
-    "main.285269fd.js.map": "/static/js/main.285269fd.js.map"
+    "main.css": "/igraph.js/static/css/main.d140aa3c.css",
+    "main.js": "/igraph.js/static/js/main.25630312.js",
+    "static/media/igraph.wasm": "/igraph.js/static/media/igraph.7e4491415ecc4f65e0c7.wasm",
+    "index.html": "/igraph.js/index.html",
+    "main.d140aa3c.css.map": "/igraph.js/static/css/main.d140aa3c.css.map",
+    "main.25630312.js.map": "/igraph.js/static/js/main.25630312.js.map"
   },
   "entrypoints": [
     "static/css/main.d140aa3c.css",
-    "static/js/main.285269fd.js"
+    "static/js/main.25630312.js"
   ]
 }
