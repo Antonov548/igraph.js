@@ -82,7 +82,7 @@ export const ShortestPath = ({ igraph }) => {
       vpath.delete();
       epath.delete();
     }
-  }, [selected])
+  }, [selected, graph, igraph])
 
   const handleNodeClick = useCallback(node => {
     if (selected.length === 2) {
