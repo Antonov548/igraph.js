@@ -50,5 +50,6 @@
     "fs": false,
     "path": false,
     "crypto": false
-  }
+  },
+  "homepage": "https://Antonov548.github.io/igraph.js"
 }
