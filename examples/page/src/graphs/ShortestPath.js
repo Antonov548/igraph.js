@@ -113,7 +113,7 @@ export const ShortestPath = ({ igraph }) => {
         height={400}
         ref={fgRef}
         graphData={data}
-        linkColor={link => { console.log(link); console.log(edges); const idx = edges.find(id => id === link.index); const color = idx === undefined ? 'gray' : 'red'; return color; }}
+        linkColor={link => { const idx = edges.find(id => id === link.index); const color = idx === undefined ? 'gray' : 'red'; return color; }}
         nodeColor={node => { const idx = vertices.find(id => id === node.id); const color = idx === undefined ? '#1d97e0' : 'yellow'; return color; }}
         linkDirectionalParticleColor={() => 'red'}
         onNodeClick={handleNodeClick}
