@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/static/css/main.d140aa3c.css",
+    "main.js": "/static/js/main.285269fd.js",
+    "static/media/igraph.wasm": "/static/media/igraph.7e4491415ecc4f65e0c7.wasm",
+    "index.html": "/index.html",
+    "main.d140aa3c.css.map": "/static/css/main.d140aa3c.css.map",
+    "main.285269fd.js.map": "/static/js/main.285269fd.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.d140aa3c.css",
+    "static/js/main.285269fd.js"
+  ]
+}
