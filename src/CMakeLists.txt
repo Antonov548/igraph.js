@@ -20,4 +20,4 @@ set_target_properties(
     RUNTIME_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR}
 )
 
-target_link_libraries(${EMSCRIPTEN_TARGET_NAME} PUBLIC igraph)
+target_link_libraries(${EMSCRIPTEN_TARGET_NAME} PUBLIC igraph igraph-cpp)

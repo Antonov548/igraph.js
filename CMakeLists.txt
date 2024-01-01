@@ -15,6 +15,7 @@ option(ENABLE_TESTS "Enable tests" ON)
 
 set(IGRAPH_INTEGER_SIZE 32)
 add_subdirectory(vendor/igraph)
+add_subdirectory(vendor/igraph-cpp)
 
 add_subdirectory(src)
 

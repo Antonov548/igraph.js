@@ -4,8 +4,7 @@ describe('igraph.js', () => {
 
     const v = new igraph.vector_int([0, 1, 1, 2, 2, 3, 2, 2]);
 
-    const g = new igraph.graph();
-    igraph.create(g, v, 0, false);
+    const g = igraph.create(v, 0, false);
 
     v.delete();
 
@@ -15,7 +14,6 @@ describe('igraph.js', () => {
     igraph.add_vertices(g, 0, 0);
     expect(igraph.vcount(g)).toEqual(14);
 
-    igraph.destroy(g);
     g.delete();
   });
 });

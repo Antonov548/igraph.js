@@ -6,13 +6,229 @@ ATTRIBUTES:
     CALL: 'reinterpret_cast<void*>(%C%)'
     CTYPE: uintptr_t
 
+VECTOR_BOOL:
+    CALL: static_cast<igraph_vector_bool_t*>(*%C%)
+    CTYPE:
+        IN: ig::igBoolVec*
+        OUT: std::unique_ptr<ig::igBoolVec>
+        INOUT: ig::igBoolVec*
+    INCONV:
+        OUT: '%C% = std::make_unique<%T%>();'
+
+BIPARTITE_TYPES:
+    CALL: static_cast<igraph_vector_bool_t*>(*%C%)
+    CTYPE:
+        IN: ig::igBoolVec*
+        OUT: std::unique_ptr<ig::igBoolVec>
+        INOUT: ig::igBoolVec*
+    INCONV:
+        OUT: '%C% = std::make_unique<%T%>();'
+
+VECTOR:
+    CALL: static_cast<igraph_vector_t*>(*%C%)
+    CTYPE:
+        IN: ig::igRealVec*
+        OUT: std::unique_ptr<ig::igRealVec>
+        INOUT: ig::igRealVec*
+    INCONV:
+        OUT: '%C% = std::make_unique<%T%>();'
+
+EDGE_CAPACITY:
+    CALL: static_cast<igraph_vector_t*>(*%C%)
+    CTYPE:
+        IN: ig::igRealVec*
+        OUT: std::unique_ptr<ig::igRealVec>
+        INOUT: ig::igRealVec*
+    INCONV:
+        OUT: '%C% = std::make_unique<%T%>();'
+
+VERTEX_QTY:
+    CALL: static_cast<igraph_vector_t*>(*%C%)
+    CTYPE:
+        IN: ig::igRealVec*
+        OUT: std::unique_ptr<ig::igRealVec>
+        INOUT: ig::igRealVec*
+    INCONV:
+        OUT: '%C% = std::make_unique<%T%>();'
+
+EDGEWEIGHTS:
+    CALL: static_cast<igraph_vector_t*>(*%C%)
+    CTYPE:
+        IN: ig::igRealVec*
+        OUT: std::unique_ptr<ig::igRealVec>
+        INOUT: ig::igRealVec*
+    INCONV:
+        OUT: '%C% = std::make_unique<%T%>();'
+
+VERTEXWEIGHTS:
+    CALL: static_cast<igraph_vector_t*>(*%C%)
+    CTYPE:
+        IN: ig::igRealVec*
+        OUT: std::unique_ptr<ig::igRealVec>
+        INOUT: ig::igRealVec*
+    INCONV:
+        OUT: '%C% = std::make_unique<%T%>();'
+
+EDGE_LENGTHS:
+    CALL: static_cast<igraph_vector_t*>(*%C%)
+    CTYPE:
+        IN: ig::igRealVec*
+        OUT: std::unique_ptr<ig::igRealVec>
+        INOUT: ig::igRealVec*
+    INCONV:
+        OUT: '%C% = std::make_unique<%T%>();'
+
 VERTEX_INDEX_PAIRS:
-    CTYPE: igraph_vector_int_t*
+    CALL: static_cast<igraph_vector_int_t*>(*%C%)
+    CTYPE:
+        IN: ig::igIntVec*
+        OUT: std::unique_ptr<ig::igIntVec>
+        INOUT: ig::igIntVec*
+    INCONV:
+        OUT: '%C% = std::make_unique<%T%>();'
+
+VERTEX_INDICES:
+    CALL: static_cast<igraph_vector_int_t*>(*%C%)
+    CTYPE:
+        IN: ig::igIntVec*
+        OUT: std::unique_ptr<ig::igIntVec>
+        INOUT: ig::igIntVec*
+    INCONV:
+        OUT: '%C% = std::make_unique<%T%>();'
+
+VECTOR_INT:
+    CALL: static_cast<igraph_vector_int_t*>(*%C%)
+    CTYPE:
+        IN: ig::igIntVec*
+        OUT: std::unique_ptr<ig::igIntVec>
+        INOUT: ig::igIntVec*
+    INCONV:
+        OUT: '%C% = std::make_unique<%T%>();'
+
+VERTEX_COLOR:
+    CALL: static_cast<igraph_vector_int_t*>(*%C%)
+    CTYPE:
+        IN: ig::igIntVec*
+        OUT: std::unique_ptr<ig::igIntVec>
+        INOUT: ig::igIntVec*
+    INCONV:
+        OUT: '%C% = std::make_unique<%T%>();'
+
+EDGE_COLOR:
+    CALL: static_cast<igraph_vector_int_t*>(*%C%)
+    CTYPE:
+        IN: ig::igIntVec*
+        OUT: std::unique_ptr<ig::igIntVec>
+        INOUT: ig::igIntVec*
+    INCONV:
+        OUT: '%C% = std::make_unique<%T%>();'
+
+EDGE_INDICES:
+    CALL: static_cast<igraph_vector_int_t*>(*%C%)
+    CTYPE:
+        IN: ig::igIntVec*
+        OUT: std::unique_ptr<ig::igIntVec>
+        INOUT: ig::igIntVec*
+    INCONV:
+        OUT: '%C% = std::make_unique<%T%>();'
+
+INDEX_VECTOR:
+    CALL: static_cast<igraph_vector_int_t*>(*%C%)
+    CTYPE:
+        IN: ig::igIntVec*
+        OUT: std::unique_ptr<ig::igIntVec>
+        INOUT: ig::igIntVec*
+    INCONV:
+        OUT: '%C% = std::make_unique<%T%>();'
+
+VECTOR_LIST:
+    CALL: static_cast<igraph_vector_int_list_t*>(*%C%)
+    CTYPE:
+        IN: ig::igVecIntList*
+        OUT: std::unique_ptr<ig::igVecIntList>
+        INOUT: ig::igVecIntList*
+    INCONV:
+        OUT: '%C% = std::make_unique<%T%>();'
+
+VECTOR_INT_LIST:
+    CALL: static_cast<igraph_vector_int_list_t*>(*%C%)
+    CTYPE:
+        IN: ig::igVecIntList*
+        OUT: std::unique_ptr<ig::igVecIntList>
+        INOUT: ig::igVecIntList*
+    INCONV:
+        OUT: '%C% = std::make_unique<%T%>();'
+
+VERTEXSET_LIST:
+    CALL: static_cast<igraph_vector_int_list_t*>(*%C%)
+    CTYPE:
+        IN: ig::igVecIntList*
+        OUT: std::unique_ptr<ig::igVecIntList>
+        INOUT: ig::igVecIntList*
+    INCONV:
+        OUT: '%C% = std::make_unique<%T%>();'
+
+EDGESET_LIST:
+    CALL: static_cast<igraph_vector_int_list_t*>(*%C%)
+    CTYPE:
+        IN: ig::igVecIntList*
+        OUT: std::unique_ptr<ig::igVecIntList>
+        INOUT: ig::igVecIntList*
+    INCONV:
+        OUT: '%C% = std::make_unique<%T%>();'
+
+MATRIX:
+    CALL: static_cast<igraph_matrix_t*>(%C%)
+    CTYPE: ig::igRealMatrix
+
+MATRIX_INT:
+    CALL: static_cast<igraph_matrix_int_t*>(%C%)
+    CTYPE: ig::igIntMatrix
+
+EDGE:
+    CALL:
+        IN: '%C%'
+        INOUT: '%C%'
+        OUT: '&%C%'
+
+INTEGER:
+    CALL:
+        IN: '%C%'
+        INOUT: '&%C%'
+        OUT: '&%C%'
+
+VERTEX:
+    CALL:
+        IN: '%C%'
+        INOUT: '&%C%'
+        OUT: '&%C%'
+
+REAL:
+    CALL:
+        IN: '%C%'
+        INOUT: '&%C%'
+        OUT: '&%C%'
+
+BOOLEAN:
+    CALL:
+        IN: '%C%'
+        OUT: '&%C%'
+        INOUT: '&%C%'
 
 GRAPH:
-    CTYPE: igraph_t*
+    CALL: static_cast<igraph_t*>(*%C%)
+    CTYPE:
+        IN: ig::igGraph*
+        OUT: std::unique_ptr<ig::igGraph>
+        INOUT: ig::igGraph*
+    INCONV:
+        OUT: '%C% = std::make_unique<%T%>();'
 
 DEPRECATED:
     CALL: {}
     CTYPE: ~
     HEADER: {}
+
+EXTRA:
+    CALL: '0'
+    CTYPE: 'void*'

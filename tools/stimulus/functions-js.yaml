@@ -21,3 +21,190 @@ igraph_status:
 
 igraph_version:
     IGNORE: JS
+
+igraph_write_graph_dot:
+    IGNORE: JS
+
+igraph_write_graph_dimacs_flow:
+    IGNORE: JS
+
+igraph_write_graph_pajek:
+    IGNORE: JS
+
+igraph_write_graph_graphml:
+    IGNORE: JS
+
+igraph_write_graph_edgelist:
+    IGNORE: JS
+
+#TODO: add sparse type
+igraph_sparse_adjacency:
+    IGNORE: JS
+
+igraph_sparse_weighted_adjacency:
+    IGNORE: JS
+
+igraph_get_laplacian_sparse:
+    IGNORE: JS
+
+igraph_adjlist:
+    IGNORE: JS
+
+igraph_hsbm_list_game:
+    IGNORE: JS
+
+igraph_pagerank:
+    IGNORE: JS
+
+igraph_personalized_pagerank:
+    IGNORE: JS
+
+igraph_personalized_pagerank_vs:
+    IGNORE: JS
+
+igraph_simplify:
+    IGNORE: JS
+
+igraph_neighborhood_graphs:
+    IGNORE: JS
+
+igraph_eigenvector_centrality:
+    IGNORE: JS
+
+igraph_hub_score:
+    IGNORE: JS
+
+igraph_authority_score:
+    IGNORE: JS
+
+igraph_hub_and_authority_scores:
+    IGNORE: JS
+
+igraph_centralization_eigenvector_centrality:
+    IGNORE: JS
+
+igraph_contract_vertices:
+    IGNORE: JS
+
+igraph_decompose:
+    IGNORE: JS
+
+igraph_cliques_callback:
+    IGNORE: JS
+
+igraph_maximal_cliques_callback:
+    IGNORE: JS
+
+igraph_maximal_cliques_file:
+    IGNORE: JS
+
+igraph_layout_fruchterman_reingold:
+    IGNORE: JS
+
+igraph_layout_fruchterman_reingold_3d:
+    IGNORE: JS
+
+igraph_layout_drl:
+    IGNORE: JS
+
+igraph_layout_drl_3d:
+    IGNORE: JS
+
+igraph_layout_merge_dla:
+    IGNORE: JS
+
+igraph_community_leading_eigenvector:
+    IGNORE: JS
+
+igraph_eigen_matrix_symmetric:
+    IGNORE: JS
+
+igraph_eigen_matrix:
+    IGNORE: JS
+
+igraph_sir:
+    IGNORE: JS
+
+igraph_power_law_fit:
+    IGNORE: JS
+
+igraph_eigen_adjacency:
+    IGNORE: JS
+
+igraph_laplacian_spectral_embedding:
+    IGNORE: JS
+
+igraph_disjoint_union_many:
+    IGNORE: JS
+
+igraph_union_many:
+    IGNORE: JS
+
+igraph_intersection_many:
+    IGNORE: JS
+
+igraph_maxflow:
+    IGNORE: JS
+
+igraph_maxflow_value:
+    IGNORE: JS
+
+igraph_canonical_permutation:
+    IGNORE: JS
+
+igraph_isomorphic_bliss:
+    IGNORE: JS
+
+igraph_automorphisms:
+    IGNORE: JS
+
+igraph_automorphism_group:
+    IGNORE: JS
+
+igraph_adjacency_spectral_embedding:
+    IGNORE: JS
+
+igraph_read_graph_dimacs_flow:
+    IGNORE: JS
+
+igraph_read_graph_ncol:
+    IGNORE: JS
+
+igraph_to_undirected:
+    IGNORE: JS
+
+igraph_get_stochastic_sparse:
+    IGNORE: JS
+
+igraph_get_adjacency_sparse:
+    IGNORE: JS
+
+igraph_from_hrg_dendrogram:
+    IGNORE: JS
+
+igraph_hrg_size:
+    IGNORE: JS
+
+igraph_hrg_resize:
+    IGNORE: JS
+
+igraph_hrg_create:
+    IGNORE: JS
+
+igraph_hrg_predict:
+    IGNORE: JS
+
+igraph_hrg_consensus:
+    IGNORE: JS
+
+igraph_hrg_game:
+    IGNORE: JS
+
+igraph_hrg_sample_many:
+    IGNORE: JS
+
+igraph_hrg_sample:
+    IGNORE: JS
+
+igraph_hrg_fit:
+    IGNORE: JS

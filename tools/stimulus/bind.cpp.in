@@ -1,8 +1,8 @@
-#include <igraph.h>
+#include "bind.hpp"
 #include <string>
+#include <memory>
 
 namespace {
-
 % STIMULUS: functions %
 }
 
