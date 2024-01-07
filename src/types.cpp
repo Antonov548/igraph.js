@@ -59,4 +59,10 @@ EMSCRIPTEN_BINDINGS(IGraphTypes)
     value("OUT", IGRAPH_OUT).
     value("IN", IGRAPH_IN).
     value("ALL", IGRAPH_ALL);
+
+  enum_<igraph_star_mode_t>("starmode").
+    value("OUT", IGRAPH_STAR_OUT).
+    value("IN", IGRAPH_STAR_IN).
+    value("UNDIRECTED", IGRAPH_STAR_UNDIRECTED).
+    value("MUTUAL", IGRAPH_STAR_MUTUAL);
 }
