@@ -58,6 +58,12 @@ namespace {
     invidx = std::make_unique<ig::igIntVec>();
 
     IGRAPH_JS_CHECK(igraph_delete_vertices_idx(static_cast<igraph_t*>(*graph), vertices, static_cast<igraph_vector_int_t*>(*idx), static_cast<igraph_vector_int_t*>(*invidx)));
+
+    var jres = var::object();
+    jres.set("graph", graph);
+    jres.set("idx", var(std::move(idx)));
+    jres.set("invidx", var(std::move(invidx)));
+    return jres;
   }
 
   igraph_integer_t js_vcount(ig::igGraph* graph) {
@@ -102,6 +108,11 @@ namespace {
 
     
     IGRAPH_JS_CHECK(igraph_edge(static_cast<igraph_t*>(*graph), eid, &from, &to));
+
+    var jres = var::object();
+    jres.set("from", var(std::move(from)));
+    jres.set("to", var(std::move(to)));
+    return jres;
   }
 
   auto js_edges(ig::igGraph* graph, igraph_es_t eids) {
@@ -191,6 +202,11 @@ namespace {
     weights = std::make_unique<ig::igRealVec>();
 
     IGRAPH_JS_CHECK(igraph_weighted_adjacency(static_cast<igraph_t*>(*graph), static_cast<igraph_matrix_t*>(adjmatrix), mode, static_cast<igraph_vector_t*>(*weights), loops));
+
+    var jres = var::object();
+    jres.set("graph", var(std::move(graph)));
+    jres.set("weights", var(std::move(weights)));
+    return jres;
   }
 
   auto js_star(igraph_integer_t n, igraph_star_mode_t mode, igraph_integer_t center) {
@@ -370,6 +386,11 @@ namespace {
     types = std::make_unique<ig::igBoolVec>();
 
     IGRAPH_JS_CHECK(igraph_full_bipartite(static_cast<igraph_t*>(*graph), static_cast<igraph_vector_bool_t*>(*types), n1, n2, directed, mode));
+
+    var jres = var::object();
+    jres.set("graph", var(std::move(graph)));
+    jres.set("types", var(std::move(types)));
+    return jres;
   }
 
   auto js_full_multipartite(ig::igIntVec* n, igraph_bool_t directed, igraph_neimode_t mode) {
@@ -380,6 +401,11 @@ namespace {
     types = std::make_unique<ig::igIntVec>();
 
     IGRAPH_JS_CHECK(igraph_full_multipartite(static_cast<igraph_t*>(*graph), static_cast<igraph_vector_int_t*>(*types), static_cast<igraph_vector_int_t*>(*n), directed, mode));
+
+    var jres = var::object();
+    jres.set("graph", var(std::move(graph)));
+    jres.set("types", var(std::move(types)));
+    return jres;
   }
 
   auto js_realize_degree_sequence(ig::igIntVec* out_deg, ig::igIntVec* in_deg, igraph_edge_type_sw_t allowed_edge_types, igraph_realize_degseq_t method) {
@@ -417,6 +443,11 @@ namespace {
     types = std::make_unique<ig::igIntVec>();
 
     IGRAPH_JS_CHECK(igraph_turan(static_cast<igraph_t*>(*graph), static_cast<igraph_vector_int_t*>(*types), n, r));
+
+    var jres = var::object();
+    jres.set("graph", var(std::move(graph)));
+    jres.set("types", var(std::move(types)));
+    return jres;
   }
 
   auto js_barabasi_game(igraph_integer_t n, igraph_real_t power, igraph_integer_t m, ig::igIntVec* outseq, igraph_bool_t outpref, igraph_real_t A, igraph_bool_t directed, igraph_barabasi_algorithm_t algo, ig::igGraph* start_from) {
@@ -499,6 +530,11 @@ namespace {
     node_type_vec = std::make_unique<ig::igIntVec>();
 
     IGRAPH_JS_CHECK(igraph_callaway_traits_game(static_cast<igraph_t*>(*graph), nodes, types, edges_per_step, static_cast<igraph_vector_t*>(*type_dist), static_cast<igraph_matrix_t*>(pref_matrix), directed, static_cast<igraph_vector_int_t*>(*node_type_vec)));
+
+    var jres = var::object();
+    jres.set("graph", var(std::move(graph)));
+    jres.set("node_type_vec", var(std::move(node_type_vec)));
+    return jres;
   }
 
   auto js_establishment_game(igraph_integer_t nodes, igraph_integer_t types, igraph_integer_t k, ig::igRealVec* type_dist, ig::igRealMatrix pref_matrix, igraph_bool_t directed) {
@@ -509,6 +545,11 @@ namespace {
     node_type_vec = std::make_unique<ig::igIntVec>();
 
     IGRAPH_JS_CHECK(igraph_establishment_game(static_cast<igraph_t*>(*graph), nodes, types, k, static_cast<igraph_vector_t*>(*type_dist), static_cast<igraph_matrix_t*>(pref_matrix), directed, static_cast<igraph_vector_int_t*>(*node_type_vec)));
+
+    var jres = var::object();
+    jres.set("graph", var(std::move(graph)));
+    jres.set("node_type_vec", var(std::move(node_type_vec)));
+    return jres;
   }
 
   auto js_grg_game(igraph_integer_t nodes, igraph_real_t radius, igraph_bool_t torus) {
@@ -521,6 +562,12 @@ namespace {
     y = std::make_unique<ig::igRealVec>();
 
     IGRAPH_JS_CHECK(igraph_grg_game(static_cast<igraph_t*>(*graph), nodes, radius, torus, static_cast<igraph_vector_t*>(*x), static_cast<igraph_vector_t*>(*y)));
+
+    var jres = var::object();
+    jres.set("graph", var(std::move(graph)));
+    jres.set("x", var(std::move(x)));
+    jres.set("y", var(std::move(y)));
+    return jres;
   }
 
   auto js_preference_game(igraph_integer_t nodes, igraph_integer_t types, ig::igRealVec* type_dist, igraph_bool_t fixed_sizes, ig::igRealMatrix pref_matrix, igraph_bool_t directed, igraph_bool_t loops) {
@@ -531,6 +578,11 @@ namespace {
     node_type_vec = std::make_unique<ig::igIntVec>();
 
     IGRAPH_JS_CHECK(igraph_preference_game(static_cast<igraph_t*>(*graph), nodes, types, static_cast<igraph_vector_t*>(*type_dist), fixed_sizes, static_cast<igraph_matrix_t*>(pref_matrix), static_cast<igraph_vector_int_t*>(*node_type_vec), directed, loops));
+
+    var jres = var::object();
+    jres.set("graph", var(std::move(graph)));
+    jres.set("node_type_vec", var(std::move(node_type_vec)));
+    return jres;
   }
 
   auto js_asymmetric_preference_game(igraph_integer_t nodes, igraph_integer_t out_types, igraph_integer_t in_types, ig::igRealMatrix type_dist_matrix, ig::igRealMatrix pref_matrix, igraph_bool_t loops) {
@@ -543,6 +595,12 @@ namespace {
     node_type_in_vec = std::make_unique<ig::igIntVec>();
 
     IGRAPH_JS_CHECK(igraph_asymmetric_preference_game(static_cast<igraph_t*>(*graph), nodes, out_types, in_types, static_cast<igraph_matrix_t*>(type_dist_matrix), static_cast<igraph_matrix_t*>(pref_matrix), static_cast<igraph_vector_int_t*>(*node_type_out_vec), static_cast<igraph_vector_int_t*>(*node_type_in_vec), loops));
+
+    var jres = var::object();
+    jres.set("graph", var(std::move(graph)));
+    jres.set("node_type_out_vec", var(std::move(node_type_out_vec)));
+    jres.set("node_type_in_vec", var(std::move(node_type_in_vec)));
+    return jres;
   }
 
   auto js_rewire_edges(ig::igGraph* graph, igraph_real_t prob, igraph_bool_t loops, igraph_bool_t multiple) {
@@ -675,6 +733,11 @@ namespace {
     graph2 = std::make_unique<ig::igGraph>();
 
     IGRAPH_JS_CHECK(igraph_correlated_pair_game(static_cast<igraph_t*>(*graph1), static_cast<igraph_t*>(*graph2), n, corr, p, directed, static_cast<igraph_vector_int_t*>(*permutation)));
+
+    var jres = var::object();
+    jres.set("graph1", var(std::move(graph1)));
+    jres.set("graph2", var(std::move(graph2)));
+    return jres;
   }
 
   auto js_dot_product_game(ig::igRealMatrix vecs, igraph_bool_t directed) {
@@ -729,6 +792,14 @@ namespace {
     edge_path = std::make_unique<ig::igIntVec>();
 
     IGRAPH_JS_CHECK(igraph_diameter(static_cast<igraph_t*>(*graph), &res, &from, &to, static_cast<igraph_vector_int_t*>(*vertex_path), static_cast<igraph_vector_int_t*>(*edge_path), directed, unconnected));
+
+    var jres = var::object();
+    jres.set("res", var(std::move(res)));
+    jres.set("from", var(std::move(from)));
+    jres.set("to", var(std::move(to)));
+    jres.set("vertex_path", var(std::move(vertex_path)));
+    jres.set("edge_path", var(std::move(edge_path)));
+    return jres;
   }
 
   auto js_diameter_dijkstra(ig::igGraph* graph, ig::igRealVec* weights, igraph_bool_t directed, igraph_bool_t unconnected) {
@@ -742,6 +813,14 @@ namespace {
     edge_path = std::make_unique<ig::igIntVec>();
 
     IGRAPH_JS_CHECK(igraph_diameter_dijkstra(static_cast<igraph_t*>(*graph), static_cast<igraph_vector_t*>(*weights), &res, &from, &to, static_cast<igraph_vector_int_t*>(*vertex_path), static_cast<igraph_vector_int_t*>(*edge_path), directed, unconnected));
+
+    var jres = var::object();
+    jres.set("res", var(std::move(res)));
+    jres.set("from", var(std::move(from)));
+    jres.set("to", var(std::move(to)));
+    jres.set("vertex_path", var(std::move(vertex_path)));
+    jres.set("edge_path", var(std::move(edge_path)));
+    return jres;
   }
 
   auto js_closeness(ig::igGraph* graph, igraph_vs_t vids, igraph_neimode_t mode, ig::igRealVec* weights, igraph_bool_t normalized) {
@@ -753,6 +832,12 @@ namespace {
     reachable_count = std::make_unique<ig::igIntVec>();
 
     IGRAPH_JS_CHECK(igraph_closeness(static_cast<igraph_t*>(*graph), static_cast<igraph_vector_t*>(*res), static_cast<igraph_vector_int_t*>(*reachable_count), &all_reachable, vids, mode, static_cast<igraph_vector_t*>(*weights), normalized));
+
+    var jres = var::object();
+    jres.set("res", var(std::move(res)));
+    jres.set("reachable_count", var(std::move(reachable_count)));
+    jres.set("all_reachable", var(std::move(all_reachable)));
+    return jres;
   }
 
   auto js_closeness_cutoff(ig::igGraph* graph, igraph_vs_t vids, igraph_neimode_t mode, ig::igRealVec* weights, igraph_bool_t normalized, igraph_real_t cutoff) {
@@ -764,6 +849,12 @@ namespace {
     reachable_count = std::make_unique<ig::igIntVec>();
 
     IGRAPH_JS_CHECK(igraph_closeness_cutoff(static_cast<igraph_t*>(*graph), static_cast<igraph_vector_t*>(*res), static_cast<igraph_vector_int_t*>(*reachable_count), &all_reachable, vids, mode, static_cast<igraph_vector_t*>(*weights), normalized, cutoff));
+
+    var jres = var::object();
+    jres.set("res", var(std::move(res)));
+    jres.set("reachable_count", var(std::move(reachable_count)));
+    jres.set("all_reachable", var(std::move(all_reachable)));
+    return jres;
   }
 
   auto js_distances(ig::igGraph* graph, igraph_vs_t from, igraph_vs_t to, igraph_neimode_t mode) {
@@ -790,6 +881,11 @@ namespace {
     edges = std::make_unique<ig::igIntVec>();
 
     IGRAPH_JS_CHECK(igraph_get_shortest_path(static_cast<igraph_t*>(*graph), static_cast<igraph_vector_int_t*>(*vertices), static_cast<igraph_vector_int_t*>(*edges), from, to, mode));
+
+    var jres = var::object();
+    jres.set("vertices", var(std::move(vertices)));
+    jres.set("edges", var(std::move(edges)));
+    return jres;
   }
 
   auto js_get_shortest_path_bellman_ford(ig::igGraph* graph, igraph_integer_t from, igraph_integer_t to, ig::igRealVec* weights, igraph_neimode_t mode) {
@@ -800,6 +896,11 @@ namespace {
     edges = std::make_unique<ig::igIntVec>();
 
     IGRAPH_JS_CHECK(igraph_get_shortest_path_bellman_ford(static_cast<igraph_t*>(*graph), static_cast<igraph_vector_int_t*>(*vertices), static_cast<igraph_vector_int_t*>(*edges), from, to, static_cast<igraph_vector_t*>(*weights), mode));
+
+    var jres = var::object();
+    jres.set("vertices", var(std::move(vertices)));
+    jres.set("edges", var(std::move(edges)));
+    return jres;
   }
 
   auto js_get_shortest_path_dijkstra(ig::igGraph* graph, igraph_integer_t from, igraph_integer_t to, ig::igRealVec* weights, igraph_neimode_t mode) {
@@ -810,6 +911,11 @@ namespace {
     edges = std::make_unique<ig::igIntVec>();
 
     IGRAPH_JS_CHECK(igraph_get_shortest_path_dijkstra(static_cast<igraph_t*>(*graph), static_cast<igraph_vector_int_t*>(*vertices), static_cast<igraph_vector_int_t*>(*edges), from, to, static_cast<igraph_vector_t*>(*weights), mode));
+
+    var jres = var::object();
+    jres.set("vertices", var(std::move(vertices)));
+    jres.set("edges", var(std::move(edges)));
+    return jres;
   }
 
   auto js_get_shortest_path_astar(ig::igGraph* graph, igraph_integer_t from, igraph_integer_t to, ig::igRealVec* weights, igraph_neimode_t mode, igraph_astar_heuristic_func_t heuristic, void* extra) {
@@ -820,6 +926,11 @@ namespace {
     edges = std::make_unique<ig::igIntVec>();
 
     IGRAPH_JS_CHECK(igraph_get_shortest_path_astar(static_cast<igraph_t*>(*graph), static_cast<igraph_vector_int_t*>(*vertices), static_cast<igraph_vector_int_t*>(*edges), from, to, static_cast<igraph_vector_t*>(*weights), mode, heuristic, 0));
+
+    var jres = var::object();
+    jres.set("vertices", var(std::move(vertices)));
+    jres.set("edges", var(std::move(edges)));
+    return jres;
   }
 
   auto js_get_shortest_paths(ig::igGraph* graph, igraph_integer_t from, igraph_vs_t to, igraph_neimode_t mode) {
@@ -834,6 +945,13 @@ namespace {
     inbound_edges = std::make_unique<ig::igIntVec>();
 
     IGRAPH_JS_CHECK(igraph_get_shortest_paths(static_cast<igraph_t*>(*graph), static_cast<igraph_vector_int_list_t*>(*vertices), static_cast<igraph_vector_int_list_t*>(*edges), from, to, mode, static_cast<igraph_vector_int_t*>(*parents), static_cast<igraph_vector_int_t*>(*inbound_edges)));
+
+    var jres = var::object();
+    jres.set("vertices", var(std::move(vertices)));
+    jres.set("edges", var(std::move(edges)));
+    jres.set("parents", var(std::move(parents)));
+    jres.set("inbound_edges", var(std::move(inbound_edges)));
+    return jres;
   }
 
   auto js_get_all_shortest_paths(ig::igGraph* graph, igraph_integer_t from, igraph_vs_t to, igraph_neimode_t mode) {
@@ -846,6 +964,12 @@ namespace {
     nrgeo = std::make_unique<ig::igIntVec>();
 
     IGRAPH_JS_CHECK(igraph_get_all_shortest_paths(static_cast<igraph_t*>(*graph), static_cast<igraph_vector_int_list_t*>(*vertices), static_cast<igraph_vector_int_list_t*>(*edges), static_cast<igraph_vector_int_t*>(*nrgeo), from, to, mode));
+
+    var jres = var::object();
+    jres.set("vertices", var(std::move(vertices)));
+    jres.set("edges", var(std::move(edges)));
+    jres.set("nrgeo", var(std::move(nrgeo)));
+    return jres;
   }
 
   auto js_distances_dijkstra(ig::igGraph* graph, igraph_vs_t from, igraph_vs_t to, ig::igRealVec* weights, igraph_neimode_t mode) {
@@ -876,6 +1000,13 @@ namespace {
     inbound_edges = std::make_unique<ig::igIntVec>();
 
     IGRAPH_JS_CHECK(igraph_get_shortest_paths_dijkstra(static_cast<igraph_t*>(*graph), static_cast<igraph_vector_int_list_t*>(*vertices), static_cast<igraph_vector_int_list_t*>(*edges), from, to, static_cast<igraph_vector_t*>(*weights), mode, static_cast<igraph_vector_int_t*>(*parents), static_cast<igraph_vector_int_t*>(*inbound_edges)));
+
+    var jres = var::object();
+    jres.set("vertices", var(std::move(vertices)));
+    jres.set("edges", var(std::move(edges)));
+    jres.set("parents", var(std::move(parents)));
+    jres.set("inbound_edges", var(std::move(inbound_edges)));
+    return jres;
   }
 
   auto js_get_shortest_paths_bellman_ford(ig::igGraph* graph, igraph_integer_t from, igraph_vs_t to, ig::igRealVec* weights, igraph_neimode_t mode) {
@@ -890,6 +1021,13 @@ namespace {
     inbound_edges = std::make_unique<ig::igIntVec>();
 
     IGRAPH_JS_CHECK(igraph_get_shortest_paths_bellman_ford(static_cast<igraph_t*>(*graph), static_cast<igraph_vector_int_list_t*>(*vertices), static_cast<igraph_vector_int_list_t*>(*edges), from, to, static_cast<igraph_vector_t*>(*weights), mode, static_cast<igraph_vector_int_t*>(*parents), static_cast<igraph_vector_int_t*>(*inbound_edges)));
+
+    var jres = var::object();
+    jres.set("vertices", var(std::move(vertices)));
+    jres.set("edges", var(std::move(edges)));
+    jres.set("parents", var(std::move(parents)));
+    jres.set("inbound_edges", var(std::move(inbound_edges)));
+    return jres;
   }
 
   auto js_get_all_shortest_paths_dijkstra(ig::igGraph* graph, igraph_integer_t from, igraph_vs_t to, ig::igRealVec* weights, igraph_neimode_t mode) {
@@ -902,6 +1040,12 @@ namespace {
     nrgeo = std::make_unique<ig::igIntVec>();
 
     IGRAPH_JS_CHECK(igraph_get_all_shortest_paths_dijkstra(static_cast<igraph_t*>(*graph), static_cast<igraph_vector_int_list_t*>(*vertices), static_cast<igraph_vector_int_list_t*>(*edges), static_cast<igraph_vector_int_t*>(*nrgeo), from, to, static_cast<igraph_vector_t*>(*weights), mode));
+
+    var jres = var::object();
+    jres.set("vertices", var(std::move(vertices)));
+    jres.set("edges", var(std::move(edges)));
+    jres.set("nrgeo", var(std::move(nrgeo)));
+    return jres;
   }
 
   auto js_distances_bellman_ford(ig::igGraph* graph, igraph_vs_t from, igraph_vs_t to, ig::igRealVec* weights, igraph_neimode_t mode) {
@@ -936,6 +1080,11 @@ namespace {
     distances = std::make_unique<ig::igRealVec>();
 
     IGRAPH_JS_CHECK(igraph_voronoi(static_cast<igraph_t*>(*graph), static_cast<igraph_vector_int_t*>(*membership), static_cast<igraph_vector_t*>(*distances), static_cast<igraph_vector_int_t*>(*generators), static_cast<igraph_vector_t*>(*weights), mode, tiebreaker));
+
+    var jres = var::object();
+    jres.set("membership", var(std::move(membership)));
+    jres.set("distances", var(std::move(distances)));
+    return jres;
   }
 
   auto js_get_all_simple_paths(ig::igGraph* graph, igraph_integer_t from, igraph_vs_t to, igraph_integer_t cutoff, igraph_neimode_t mode) {
@@ -955,6 +1104,11 @@ namespace {
     edge_paths = std::make_unique<ig::igVecIntList>();
 
     IGRAPH_JS_CHECK(igraph_get_k_shortest_paths(static_cast<igraph_t*>(*graph), static_cast<igraph_vector_t*>(*weights), static_cast<igraph_vector_int_list_t*>(*vertex_paths), static_cast<igraph_vector_int_list_t*>(*edge_paths), k, from, to, mode));
+
+    var jres = var::object();
+    jres.set("vertex_paths", var(std::move(vertex_paths)));
+    jres.set("edge_paths", var(std::move(edge_paths)));
+    return jres;
   }
 
   auto js_get_widest_path(ig::igGraph* graph, igraph_integer_t from, igraph_integer_t to, ig::igRealVec* weights, igraph_neimode_t mode) {
@@ -965,6 +1119,11 @@ namespace {
     edges = std::make_unique<ig::igIntVec>();
 
     IGRAPH_JS_CHECK(igraph_get_widest_path(static_cast<igraph_t*>(*graph), static_cast<igraph_vector_int_t*>(*vertices), static_cast<igraph_vector_int_t*>(*edges), from, to, static_cast<igraph_vector_t*>(*weights), mode));
+
+    var jres = var::object();
+    jres.set("vertices", var(std::move(vertices)));
+    jres.set("edges", var(std::move(edges)));
+    return jres;
   }
 
   auto js_get_widest_paths(ig::igGraph* graph, igraph_integer_t from, igraph_vs_t to, ig::igRealVec* weights, igraph_neimode_t mode) {
@@ -979,6 +1138,13 @@ namespace {
     inbound_edges = std::make_unique<ig::igIntVec>();
 
     IGRAPH_JS_CHECK(igraph_get_widest_paths(static_cast<igraph_t*>(*graph), static_cast<igraph_vector_int_list_t*>(*vertices), static_cast<igraph_vector_int_list_t*>(*edges), from, to, static_cast<igraph_vector_t*>(*weights), mode, static_cast<igraph_vector_int_t*>(*parents), static_cast<igraph_vector_int_t*>(*inbound_edges)));
+
+    var jres = var::object();
+    jres.set("vertices", var(std::move(vertices)));
+    jres.set("edges", var(std::move(edges)));
+    jres.set("parents", var(std::move(parents)));
+    jres.set("inbound_edges", var(std::move(inbound_edges)));
+    return jres;
   }
 
   auto js_widest_path_widths_dijkstra(ig::igGraph* graph, igraph_vs_t from, igraph_vs_t to, ig::igRealVec* weights, igraph_neimode_t mode) {
@@ -1125,6 +1291,11 @@ namespace {
 
     
     IGRAPH_JS_CHECK(igraph_average_path_length(static_cast<igraph_t*>(*graph), &res, &unconn_pairs, directed, unconn));
+
+    var jres = var::object();
+    jres.set("res", var(std::move(res)));
+    jres.set("unconn_pairs", var(std::move(unconn_pairs)));
+    return jres;
   }
 
   auto js_average_path_length_dijkstra(ig::igGraph* graph, ig::igRealVec* weights, igraph_bool_t directed, igraph_bool_t unconn) {
@@ -1133,6 +1304,11 @@ namespace {
 
     
     IGRAPH_JS_CHECK(igraph_average_path_length_dijkstra(static_cast<igraph_t*>(*graph), &res, &unconn_pairs, static_cast<igraph_vector_t*>(*weights), directed, unconn));
+
+    var jres = var::object();
+    jres.set("res", var(std::move(res)));
+    jres.set("unconn_pairs", var(std::move(unconn_pairs)));
+    return jres;
   }
 
   auto js_path_length_hist(ig::igGraph* graph, igraph_bool_t directed) {
@@ -1142,6 +1318,11 @@ namespace {
     res = std::make_unique<ig::igRealVec>();
 
     IGRAPH_JS_CHECK(igraph_path_length_hist(static_cast<igraph_t*>(*graph), static_cast<igraph_vector_t*>(*res), &unconnected, directed));
+
+    var jres = var::object();
+    jres.set("res", var(std::move(res)));
+    jres.set("unconnected", var(std::move(unconnected)));
+    return jres;
   }
 
   auto js_transitivity_undirected(ig::igGraph* graph, igraph_transitivity_mode_t mode) {
@@ -1330,6 +1511,11 @@ namespace {
     circle = std::make_unique<ig::igIntVec>();
 
     IGRAPH_JS_CHECK(igraph_girth(static_cast<igraph_t*>(*graph), &girth, static_cast<igraph_vector_int_t*>(*circle)));
+
+    var jres = var::object();
+    jres.set("girth", var(std::move(girth)));
+    jres.set("circle", var(std::move(circle)));
+    return jres;
   }
 
   auto js_is_perfect(ig::igGraph* graph) {
@@ -1355,6 +1541,11 @@ namespace {
     vertex_index = std::make_unique<ig::igIntVec>();
 
     IGRAPH_JS_CHECK(igraph_unfold_tree(static_cast<igraph_t*>(*graph), static_cast<igraph_t*>(*tree), mode, static_cast<igraph_vector_int_t*>(*roots), static_cast<igraph_vector_int_t*>(*vertex_index)));
+
+    var jres = var::object();
+    jres.set("tree", var(std::move(tree)));
+    jres.set("vertex_index", var(std::move(vertex_index)));
+    return jres;
   }
 
   auto js_is_mutual(ig::igGraph* graph, igraph_es_t es, igraph_bool_t loops) {
@@ -1382,6 +1573,11 @@ namespace {
     alpham1 = std::make_unique<ig::igIntVec>();
 
     IGRAPH_JS_CHECK(igraph_maximum_cardinality_search(static_cast<igraph_t*>(*graph), static_cast<igraph_vector_int_t*>(*alpha), static_cast<igraph_vector_int_t*>(*alpham1)));
+
+    var jres = var::object();
+    jres.set("alpha", var(std::move(alpha)));
+    jres.set("alpham1", var(std::move(alpham1)));
+    return jres;
   }
 
   auto js_is_chordal(ig::igGraph* graph, ig::igIntVec* alpha, ig::igIntVec* alpham1) {
@@ -1393,6 +1589,12 @@ namespace {
     newgraph = std::make_unique<ig::igGraph>();
 
     IGRAPH_JS_CHECK(igraph_is_chordal(static_cast<igraph_t*>(*graph), static_cast<igraph_vector_int_t*>(*alpha), static_cast<igraph_vector_int_t*>(*alpham1), &chordal, static_cast<igraph_vector_int_t*>(*fillin), static_cast<igraph_t*>(*newgraph)));
+
+    var jres = var::object();
+    jres.set("chordal", var(std::move(chordal)));
+    jres.set("fillin", var(std::move(fillin)));
+    jres.set("newgraph", var(std::move(newgraph)));
+    return jres;
   }
 
   auto js_avg_nearest_neighbor_degree(ig::igGraph* graph, igraph_vs_t vids, igraph_neimode_t mode, igraph_neimode_t neighbor_degree_mode, ig::igRealVec* weights) {
@@ -1403,6 +1605,11 @@ namespace {
     knnk = std::make_unique<ig::igRealVec>();
 
     IGRAPH_JS_CHECK(igraph_avg_nearest_neighbor_degree(static_cast<igraph_t*>(*graph), vids, mode, neighbor_degree_mode, static_cast<igraph_vector_t*>(*knn), static_cast<igraph_vector_t*>(*knnk), static_cast<igraph_vector_t*>(*weights)));
+
+    var jres = var::object();
+    jres.set("knn", var(std::move(knn)));
+    jres.set("knnk", var(std::move(knnk)));
+    return jres;
   }
 
   auto js_degree_correlation_vector(ig::igGraph* graph, ig::igRealVec* weights, igraph_neimode_t from_mode, igraph_neimode_t to_mode, igraph_bool_t directed_neighbors) {
@@ -1437,6 +1644,12 @@ namespace {
     res = std::make_unique<ig::igRealVec>();
 
     IGRAPH_JS_CHECK(igraph_centralization_degree(static_cast<igraph_t*>(*graph), static_cast<igraph_vector_t*>(*res), mode, loops, &centralization, &theoretical_max, normalized));
+
+    var jres = var::object();
+    jres.set("res", var(std::move(res)));
+    jres.set("centralization", var(std::move(centralization)));
+    jres.set("theoretical_max", var(std::move(theoretical_max)));
+    return jres;
   }
 
   auto js_centralization_degree_tmax(ig::igGraph* graph, igraph_integer_t nodes, igraph_neimode_t mode, igraph_bool_t loops) {
@@ -1455,6 +1668,12 @@ namespace {
     res = std::make_unique<ig::igRealVec>();
 
     IGRAPH_JS_CHECK(igraph_centralization_betweenness(static_cast<igraph_t*>(*graph), static_cast<igraph_vector_t*>(*res), directed, &centralization, &theoretical_max, normalized));
+
+    var jres = var::object();
+    jres.set("res", var(std::move(res)));
+    jres.set("centralization", var(std::move(centralization)));
+    jres.set("theoretical_max", var(std::move(theoretical_max)));
+    return jres;
   }
 
   auto js_centralization_betweenness_tmax(ig::igGraph* graph, igraph_integer_t nodes, igraph_bool_t directed) {
@@ -1473,6 +1692,12 @@ namespace {
     res = std::make_unique<ig::igRealVec>();
 
     IGRAPH_JS_CHECK(igraph_centralization_closeness(static_cast<igraph_t*>(*graph), static_cast<igraph_vector_t*>(*res), mode, &centralization, &theoretical_max, normalized));
+
+    var jres = var::object();
+    jres.set("res", var(std::move(res)));
+    jres.set("centralization", var(std::move(centralization)));
+    jres.set("theoretical_max", var(std::move(theoretical_max)));
+    return jres;
   }
 
   auto js_centralization_closeness_tmax(ig::igGraph* graph, igraph_integer_t nodes, igraph_neimode_t mode) {
@@ -1582,6 +1807,12 @@ namespace {
 
     
     IGRAPH_JS_CHECK(igraph_pseudo_diameter(static_cast<igraph_t*>(*graph), &diameter, start_vid, &from, &to, directed, unconnected));
+
+    var jres = var::object();
+    jres.set("diameter", var(std::move(diameter)));
+    jres.set("from", var(std::move(from)));
+    jres.set("to", var(std::move(to)));
+    return jres;
   }
 
   auto js_pseudo_diameter_dijkstra(ig::igGraph* graph, ig::igRealVec* weights, igraph_integer_t start_vid, igraph_bool_t directed, igraph_bool_t unconnected) {
@@ -1591,6 +1822,12 @@ namespace {
 
     
     IGRAPH_JS_CHECK(igraph_pseudo_diameter_dijkstra(static_cast<igraph_t*>(*graph), static_cast<igraph_vector_t*>(*weights), &diameter, start_vid, &from, &to, directed, unconnected));
+
+    var jres = var::object();
+    jres.set("diameter", var(std::move(diameter)));
+    jres.set("from", var(std::move(from)));
+    jres.set("to", var(std::move(to)));
+    return jres;
   }
 
   auto js_diversity(ig::igGraph* graph, ig::igRealVec* weights, igraph_vs_t vids) {
@@ -1610,6 +1847,11 @@ namespace {
     edges = std::make_unique<ig::igIntVec>();
 
     IGRAPH_JS_CHECK(igraph_random_walk(static_cast<igraph_t*>(*graph), static_cast<igraph_vector_t*>(*weights), static_cast<igraph_vector_int_t*>(*vertices), static_cast<igraph_vector_int_t*>(*edges), start, mode, steps, stuck));
+
+    var jres = var::object();
+    jres.set("vertices", var(std::move(vertices)));
+    jres.set("edges", var(std::move(edges)));
+    return jres;
   }
 
   auto js_random_edge_walk(ig::igGraph* graph, ig::igRealVec* weights, igraph_integer_t start, igraph_neimode_t mode, igraph_integer_t steps, igraph_random_walk_stuck_t stuck) {
@@ -1696,6 +1938,15 @@ namespace {
     dist = std::make_unique<ig::igIntVec>();
 
     IGRAPH_JS_CHECK(igraph_bfs(static_cast<igraph_t*>(*graph), root, static_cast<igraph_vector_int_t*>(*roots), mode, unreachable, static_cast<igraph_vector_int_t*>(*restricted), static_cast<igraph_vector_int_t*>(*order), static_cast<igraph_vector_int_t*>(*rank), static_cast<igraph_vector_int_t*>(*parents), static_cast<igraph_vector_int_t*>(*pred), static_cast<igraph_vector_int_t*>(*succ), static_cast<igraph_vector_int_t*>(*dist), callback, 0));
+
+    var jres = var::object();
+    jres.set("order", var(std::move(order)));
+    jres.set("rank", var(std::move(rank)));
+    jres.set("parents", var(std::move(parents)));
+    jres.set("pred", var(std::move(pred)));
+    jres.set("succ", var(std::move(succ)));
+    jres.set("dist", var(std::move(dist)));
+    return jres;
   }
 
   auto js_bfs_simple(ig::igGraph* graph, igraph_integer_t root, igraph_neimode_t mode) {
@@ -1708,6 +1959,12 @@ namespace {
     parents = std::make_unique<ig::igIntVec>();
 
     IGRAPH_JS_CHECK(igraph_bfs_simple(static_cast<igraph_t*>(*graph), root, mode, static_cast<igraph_vector_int_t*>(*order), static_cast<igraph_vector_int_t*>(*layers), static_cast<igraph_vector_int_t*>(*parents)));
+
+    var jres = var::object();
+    jres.set("order", var(std::move(order)));
+    jres.set("layers", var(std::move(layers)));
+    jres.set("parents", var(std::move(parents)));
+    return jres;
   }
 
   auto js_dfs(ig::igGraph* graph, igraph_integer_t root, igraph_neimode_t mode, igraph_bool_t unreachable, igraph_dfshandler_t in_callback, igraph_dfshandler_t out_callback, void* extra) {
@@ -1722,6 +1979,13 @@ namespace {
     dist = std::make_unique<ig::igIntVec>();
 
     IGRAPH_JS_CHECK(igraph_dfs(static_cast<igraph_t*>(*graph), root, mode, unreachable, static_cast<igraph_vector_int_t*>(*order), static_cast<igraph_vector_int_t*>(*order_out), static_cast<igraph_vector_int_t*>(*father), static_cast<igraph_vector_int_t*>(*dist), in_callback, out_callback, 0));
+
+    var jres = var::object();
+    jres.set("order", var(std::move(order)));
+    jres.set("order_out", var(std::move(order_out)));
+    jres.set("father", var(std::move(father)));
+    jres.set("dist", var(std::move(dist)));
+    return jres;
   }
 
   auto js_bipartite_projection_size(ig::igGraph* graph, ig::igBoolVec* types) {
@@ -1732,6 +1996,13 @@ namespace {
 
     
     IGRAPH_JS_CHECK(igraph_bipartite_projection_size(static_cast<igraph_t*>(*graph), static_cast<igraph_vector_bool_t*>(*types), &vcount1, &ecount1, &vcount2, &ecount2));
+
+    var jres = var::object();
+    jres.set("vcount1", var(std::move(vcount1)));
+    jres.set("ecount1", var(std::move(ecount1)));
+    jres.set("vcount2", var(std::move(vcount2)));
+    jres.set("ecount2", var(std::move(ecount2)));
+    return jres;
   }
 
   auto js_bipartite_projection(ig::igGraph* graph, ig::igBoolVec* types, igraph_integer_t probe1) {
@@ -1746,6 +2017,13 @@ namespace {
     multiplicity2 = std::make_unique<ig::igIntVec>();
 
     IGRAPH_JS_CHECK(igraph_bipartite_projection(static_cast<igraph_t*>(*graph), static_cast<igraph_vector_bool_t*>(*types), static_cast<igraph_t*>(*proj1), static_cast<igraph_t*>(*proj2), static_cast<igraph_vector_int_t*>(*multiplicity1), static_cast<igraph_vector_int_t*>(*multiplicity2), probe1));
+
+    var jres = var::object();
+    jres.set("proj1", var(std::move(proj1)));
+    jres.set("proj2", var(std::move(proj2)));
+    jres.set("multiplicity1", var(std::move(multiplicity1)));
+    jres.set("multiplicity2", var(std::move(multiplicity2)));
+    return jres;
   }
 
   auto js_create_bipartite(ig::igBoolVec* types, ig::igIntVec* edges, igraph_bool_t directed) {
@@ -1765,6 +2043,11 @@ namespace {
     types = std::make_unique<ig::igBoolVec>();
 
     IGRAPH_JS_CHECK(igraph_biadjacency(static_cast<igraph_t*>(*graph), static_cast<igraph_vector_bool_t*>(*types), static_cast<igraph_matrix_t*>(incidence), directed, mode, multiple));
+
+    var jres = var::object();
+    jres.set("graph", var(std::move(graph)));
+    jres.set("types", var(std::move(types)));
+    return jres;
   }
 
   auto js_get_biadjacency(ig::igGraph* graph, ig::igBoolVec* types) {
@@ -1776,6 +2059,12 @@ namespace {
     col_ids = std::make_unique<ig::igIntVec>();
 
     IGRAPH_JS_CHECK(igraph_get_biadjacency(static_cast<igraph_t*>(*graph), static_cast<igraph_vector_bool_t*>(*types), static_cast<igraph_matrix_t*>(res), static_cast<igraph_vector_int_t*>(*row_ids), static_cast<igraph_vector_int_t*>(*col_ids)));
+
+    var jres = var::object();
+    jres.set("res", var(std::move(res)));
+    jres.set("row_ids", var(std::move(row_ids)));
+    jres.set("col_ids", var(std::move(col_ids)));
+    return jres;
   }
 
   auto js_is_bipartite(ig::igGraph* graph) {
@@ -1785,6 +2074,11 @@ namespace {
     type = std::make_unique<ig::igBoolVec>();
 
     IGRAPH_JS_CHECK(igraph_is_bipartite(static_cast<igraph_t*>(*graph), &res, static_cast<igraph_vector_bool_t*>(*type)));
+
+    var jres = var::object();
+    jres.set("res", var(std::move(res)));
+    jres.set("type", var(std::move(type)));
+    return jres;
   }
 
   auto js_bipartite_game_gnp(igraph_integer_t n1, igraph_integer_t n2, igraph_real_t p, igraph_bool_t directed, igraph_neimode_t mode) {
@@ -1795,6 +2089,11 @@ namespace {
     types = std::make_unique<ig::igBoolVec>();
 
     IGRAPH_JS_CHECK(igraph_bipartite_game_gnp(static_cast<igraph_t*>(*graph), static_cast<igraph_vector_bool_t*>(*types), n1, n2, p, directed, mode));
+
+    var jres = var::object();
+    jres.set("graph", var(std::move(graph)));
+    jres.set("types", var(std::move(types)));
+    return jres;
   }
 
   auto js_bipartite_game_gnm(igraph_integer_t n1, igraph_integer_t n2, igraph_integer_t m, igraph_bool_t directed, igraph_neimode_t mode) {
@@ -1805,6 +2104,11 @@ namespace {
     types = std::make_unique<ig::igBoolVec>();
 
     IGRAPH_JS_CHECK(igraph_bipartite_game_gnm(static_cast<igraph_t*>(*graph), static_cast<igraph_vector_bool_t*>(*types), n1, n2, m, directed, mode));
+
+    var jres = var::object();
+    jres.set("graph", var(std::move(graph)));
+    jres.set("types", var(std::move(types)));
+    return jres;
   }
 
   auto js_bipartite_game(igraph_erdos_renyi_t type, igraph_integer_t n1, igraph_integer_t n2, igraph_real_t p, igraph_integer_t m, igraph_bool_t directed, igraph_neimode_t mode) {
@@ -1815,6 +2119,11 @@ namespace {
     types = std::make_unique<ig::igBoolVec>();
 
     IGRAPH_JS_CHECK(igraph_bipartite_game(static_cast<igraph_t*>(*graph), static_cast<igraph_vector_bool_t*>(*types), type, n1, n2, p, m, directed, mode));
+
+    var jres = var::object();
+    jres.set("graph", var(std::move(graph)));
+    jres.set("types", var(std::move(types)));
+    return jres;
   }
 
   auto js_get_laplacian(ig::igGraph* graph, igraph_neimode_t mode, igraph_laplacian_normalization_t normalization, ig::igRealVec* weights) {
@@ -1834,6 +2143,12 @@ namespace {
     csize = std::make_unique<ig::igIntVec>();
 
     IGRAPH_JS_CHECK(igraph_connected_components(static_cast<igraph_t*>(*graph), static_cast<igraph_vector_int_t*>(*membership), static_cast<igraph_vector_int_t*>(*csize), &no, mode));
+
+    var jres = var::object();
+    jres.set("membership", var(std::move(membership)));
+    jres.set("csize", var(std::move(csize)));
+    jres.set("no", var(std::move(no)));
+    return jres;
   }
 
   auto js_is_connected(ig::igGraph* graph, igraph_connectedness_t mode) {
@@ -1866,6 +2181,14 @@ namespace {
     articulation_points = std::make_unique<ig::igIntVec>();
 
     IGRAPH_JS_CHECK(igraph_biconnected_components(static_cast<igraph_t*>(*graph), &no, static_cast<igraph_vector_int_list_t*>(*tree_edges), static_cast<igraph_vector_int_list_t*>(*component_edges), static_cast<igraph_vector_int_list_t*>(*components), static_cast<igraph_vector_int_t*>(*articulation_points)));
+
+    var jres = var::object();
+    jres.set("no", var(std::move(no)));
+    jres.set("tree_edges", var(std::move(tree_edges)));
+    jres.set("component_edges", var(std::move(component_edges)));
+    jres.set("components", var(std::move(components)));
+    jres.set("articulation_points", var(std::move(articulation_points)));
+    return jres;
   }
 
   auto js_bridges(ig::igGraph* graph) {
@@ -1920,6 +2243,11 @@ namespace {
     res = std::make_unique<ig::igVecIntList>();
 
     IGRAPH_JS_CHECK(igraph_maximal_cliques_subset(static_cast<igraph_t*>(*graph), static_cast<igraph_vector_int_t*>(*subset), static_cast<igraph_vector_int_list_t*>(*res), &no, outfile, min_size, max_size));
+
+    var jres = var::object();
+    jres.set("res", var(std::move(res)));
+    jres.set("no", var(std::move(no)));
+    return jres;
   }
 
   auto js_maximal_cliques_count(ig::igGraph* graph, igraph_integer_t min_size, igraph_integer_t max_size) {
@@ -2127,6 +2455,12 @@ namespace {
     extd_to_orig_eids = std::make_unique<ig::igIntVec>();
 
     IGRAPH_JS_CHECK(igraph_layout_sugiyama(static_cast<igraph_t*>(*graph), static_cast<igraph_matrix_t*>(res), static_cast<igraph_t*>(*extd_graph), static_cast<igraph_vector_int_t*>(*extd_to_orig_eids), static_cast<igraph_vector_int_t*>(*layers), hgap, vgap, maxiter, static_cast<igraph_vector_t*>(*weights)));
+
+    var jres = var::object();
+    jres.set("res", var(std::move(res)));
+    jres.set("extd_graph", var(std::move(extd_graph)));
+    jres.set("extd_to_orig_eids", var(std::move(extd_to_orig_eids)));
+    return jres;
   }
 
   auto js_layout_mds(ig::igGraph* graph, ig::igRealMatrix dist, igraph_integer_t dim) {
@@ -2274,6 +2608,13 @@ namespace {
     csize = std::make_unique<ig::igIntVec>();
 
     IGRAPH_JS_CHECK(igraph_community_spinglass(static_cast<igraph_t*>(*graph), static_cast<igraph_vector_t*>(*weights), &modularity, &temperature, static_cast<igraph_vector_int_t*>(*membership), static_cast<igraph_vector_int_t*>(*csize), spins, parupdate, starttemp, stoptemp, coolfact, update_rule, gamma, implementation, lambda));
+
+    var jres = var::object();
+    jres.set("modularity", var(std::move(modularity)));
+    jres.set("temperature", var(std::move(temperature)));
+    jres.set("membership", var(std::move(membership)));
+    jres.set("csize", var(std::move(csize)));
+    return jres;
   }
 
   auto js_community_spinglass_single(ig::igGraph* graph, ig::igRealVec* weights, igraph_integer_t vertex, igraph_integer_t spins, igraph_spincomm_update_t update_rule, igraph_real_t gamma) {
@@ -2286,6 +2627,14 @@ namespace {
     community = std::make_unique<ig::igIntVec>();
 
     IGRAPH_JS_CHECK(igraph_community_spinglass_single(static_cast<igraph_t*>(*graph), static_cast<igraph_vector_t*>(*weights), vertex, static_cast<igraph_vector_int_t*>(*community), &cohesion, &adhesion, &inner_links, &outer_links, spins, update_rule, gamma));
+
+    var jres = var::object();
+    jres.set("community", var(std::move(community)));
+    jres.set("cohesion", var(std::move(cohesion)));
+    jres.set("adhesion", var(std::move(adhesion)));
+    jres.set("inner_links", var(std::move(inner_links)));
+    jres.set("outer_links", var(std::move(outer_links)));
+    return jres;
   }
 
   auto js_community_walktrap(ig::igGraph* graph, ig::igRealVec* weights, igraph_integer_t steps) {
@@ -2297,6 +2646,12 @@ namespace {
     membership = std::make_unique<ig::igIntVec>();
 
     IGRAPH_JS_CHECK(igraph_community_walktrap(static_cast<igraph_t*>(*graph), static_cast<igraph_vector_t*>(*weights), steps, static_cast<igraph_matrix_int_t*>(merges), static_cast<igraph_vector_t*>(*modularity), static_cast<igraph_vector_int_t*>(*membership)));
+
+    var jres = var::object();
+    jres.set("merges", var(std::move(merges)));
+    jres.set("modularity", var(std::move(modularity)));
+    jres.set("membership", var(std::move(membership)));
+    return jres;
   }
 
   auto js_community_edge_betweenness(ig::igGraph* graph, igraph_bool_t directed, ig::igRealVec* weights) {
@@ -2314,6 +2669,15 @@ namespace {
     membership = std::make_unique<ig::igIntVec>();
 
     IGRAPH_JS_CHECK(igraph_community_edge_betweenness(static_cast<igraph_t*>(*graph), static_cast<igraph_vector_int_t*>(*result), static_cast<igraph_vector_t*>(*edge_betweenness), static_cast<igraph_matrix_int_t*>(merges), static_cast<igraph_vector_int_t*>(*bridges), static_cast<igraph_vector_t*>(*modularity), static_cast<igraph_vector_int_t*>(*membership), directed, static_cast<igraph_vector_t*>(*weights)));
+
+    var jres = var::object();
+    jres.set("result", var(std::move(result)));
+    jres.set("edge_betweenness", var(std::move(edge_betweenness)));
+    jres.set("merges", var(std::move(merges)));
+    jres.set("bridges", var(std::move(bridges)));
+    jres.set("modularity", var(std::move(modularity)));
+    jres.set("membership", var(std::move(membership)));
+    return jres;
   }
 
   auto js_community_eb_get_merges(ig::igGraph* graph, igraph_bool_t directed, ig::igIntVec* edges, ig::igRealVec* weights) {
@@ -2327,6 +2691,13 @@ namespace {
     membership = std::make_unique<ig::igIntVec>();
 
     IGRAPH_JS_CHECK(igraph_community_eb_get_merges(static_cast<igraph_t*>(*graph), directed, static_cast<igraph_vector_int_t*>(*edges), static_cast<igraph_vector_t*>(*weights), static_cast<igraph_matrix_int_t*>(merges), static_cast<igraph_vector_int_t*>(*bridges), static_cast<igraph_vector_t*>(*modularity), static_cast<igraph_vector_int_t*>(*membership)));
+
+    var jres = var::object();
+    jres.set("merges", var(std::move(merges)));
+    jres.set("bridges", var(std::move(bridges)));
+    jres.set("modularity", var(std::move(modularity)));
+    jres.set("membership", var(std::move(membership)));
+    return jres;
   }
 
   auto js_community_fastgreedy(ig::igGraph* graph, ig::igRealVec* weights) {
@@ -2338,6 +2709,12 @@ namespace {
     membership = std::make_unique<ig::igIntVec>();
 
     IGRAPH_JS_CHECK(igraph_community_fastgreedy(static_cast<igraph_t*>(*graph), static_cast<igraph_vector_t*>(*weights), static_cast<igraph_matrix_int_t*>(merges), static_cast<igraph_vector_t*>(*modularity), static_cast<igraph_vector_int_t*>(*membership)));
+
+    var jres = var::object();
+    jres.set("merges", var(std::move(merges)));
+    jres.set("modularity", var(std::move(modularity)));
+    jres.set("membership", var(std::move(membership)));
+    return jres;
   }
 
   auto js_community_to_membership(ig::igIntMatrix merges, igraph_integer_t nodes, igraph_integer_t steps) {
@@ -2348,6 +2725,11 @@ namespace {
     csize = std::make_unique<ig::igIntVec>();
 
     IGRAPH_JS_CHECK(igraph_community_to_membership(static_cast<igraph_matrix_int_t*>(merges), nodes, steps, static_cast<igraph_vector_int_t*>(*membership), static_cast<igraph_vector_int_t*>(*csize)));
+
+    var jres = var::object();
+    jres.set("membership", var(std::move(membership)));
+    jres.set("csize", var(std::move(csize)));
+    return jres;
   }
 
   auto js_le_community_to_membership(ig::igIntMatrix merges, igraph_integer_t steps, ig::igIntVec* membership) {
@@ -2356,6 +2738,11 @@ namespace {
     csize = std::make_unique<ig::igIntVec>();
 
     IGRAPH_JS_CHECK(igraph_le_community_to_membership(static_cast<igraph_matrix_int_t*>(merges), steps, static_cast<igraph_vector_int_t*>(*membership), static_cast<igraph_vector_int_t*>(*csize)));
+
+    var jres = var::object();
+    jres.set("membership", membership);
+    jres.set("csize", var(std::move(csize)));
+    return jres;
   }
 
   auto js_modularity(ig::igGraph* graph, ig::igIntVec* membership, ig::igRealVec* weights, igraph_real_t resolution, igraph_bool_t directed) {
@@ -2381,6 +2768,12 @@ namespace {
     new_to_old = std::make_unique<ig::igIntVec>();
 
     IGRAPH_JS_CHECK(igraph_reindex_membership(static_cast<igraph_vector_int_t*>(*membership), static_cast<igraph_vector_int_t*>(*new_to_old), &nb_clusters));
+
+    var jres = var::object();
+    jres.set("membership", membership);
+    jres.set("new_to_old", var(std::move(new_to_old)));
+    jres.set("nb_clusters", var(std::move(nb_clusters)));
+    return jres;
   }
 
   auto js_community_fluid_communities(ig::igGraph* graph, igraph_integer_t no_of_communities) {
@@ -2410,6 +2803,12 @@ namespace {
     modularity = std::make_unique<ig::igRealVec>();
 
     IGRAPH_JS_CHECK(igraph_community_multilevel(static_cast<igraph_t*>(*graph), static_cast<igraph_vector_t*>(*weights), resolution, static_cast<igraph_vector_int_t*>(*membership), static_cast<igraph_matrix_int_t*>(memberships), static_cast<igraph_vector_t*>(*modularity)));
+
+    var jres = var::object();
+    jres.set("membership", var(std::move(membership)));
+    jres.set("memberships", var(std::move(memberships)));
+    jres.set("modularity", var(std::move(modularity)));
+    return jres;
   }
 
   auto js_community_optimal_modularity(ig::igGraph* graph, ig::igRealVec* weights) {
@@ -2419,6 +2818,11 @@ namespace {
     membership = std::make_unique<ig::igIntVec>();
 
     IGRAPH_JS_CHECK(igraph_community_optimal_modularity(static_cast<igraph_t*>(*graph), &modularity, static_cast<igraph_vector_int_t*>(*membership), static_cast<igraph_vector_t*>(*weights)));
+
+    var jres = var::object();
+    jres.set("modularity", var(std::move(modularity)));
+    jres.set("membership", var(std::move(membership)));
+    return jres;
   }
 
   auto js_community_leiden(ig::igGraph* graph, ig::igRealVec* weights, ig::igRealVec* vertex_weights, igraph_real_t resolution, igraph_real_t beta, igraph_bool_t start, igraph_integer_t n_iterations, ig::igIntVec* membership) {
@@ -2427,6 +2831,12 @@ namespace {
 
     
     IGRAPH_JS_CHECK(igraph_community_leiden(static_cast<igraph_t*>(*graph), static_cast<igraph_vector_t*>(*weights), static_cast<igraph_vector_t*>(*vertex_weights), resolution, beta, start, n_iterations, static_cast<igraph_vector_int_t*>(*membership), &nb_clusters, &quality));
+
+    var jres = var::object();
+    jres.set("membership", membership);
+    jres.set("nb_clusters", var(std::move(nb_clusters)));
+    jres.set("quality", var(std::move(quality)));
+    return jres;
   }
 
   auto js_split_join_distance(ig::igIntVec* comm1, ig::igIntVec* comm2) {
@@ -2435,6 +2845,11 @@ namespace {
 
     
     IGRAPH_JS_CHECK(igraph_split_join_distance(static_cast<igraph_vector_int_t*>(*comm1), static_cast<igraph_vector_int_t*>(*comm2), &distance12, &distance21));
+
+    var jres = var::object();
+    jres.set("distance12", var(std::move(distance12)));
+    jres.set("distance21", var(std::move(distance21)));
+    return jres;
   }
 
   auto js_community_infomap(ig::igGraph* graph, ig::igRealVec* e_weights, ig::igRealVec* v_weights, igraph_integer_t nb_trials) {
@@ -2444,6 +2859,11 @@ namespace {
     membership = std::make_unique<ig::igIntVec>();
 
     IGRAPH_JS_CHECK(igraph_community_infomap(static_cast<igraph_t*>(*graph), static_cast<igraph_vector_t*>(*e_weights), static_cast<igraph_vector_t*>(*v_weights), nb_trials, static_cast<igraph_vector_int_t*>(*membership), &codelength));
+
+    var jres = var::object();
+    jres.set("membership", var(std::move(membership)));
+    jres.set("codelength", var(std::move(codelength)));
+    return jres;
   }
 
   auto js_community_voronoi(ig::igGraph* graph, ig::igRealVec* lengths, ig::igRealVec* weights, igraph_neimode_t mode, igraph_real_t radius) {
@@ -2455,6 +2875,12 @@ namespace {
     generators = std::make_unique<ig::igIntVec>();
 
     IGRAPH_JS_CHECK(igraph_community_voronoi(static_cast<igraph_t*>(*graph), static_cast<igraph_vector_int_t*>(*membership), static_cast<igraph_vector_int_t*>(*generators), &modularity, static_cast<igraph_vector_t*>(*lengths), static_cast<igraph_vector_t*>(*weights), mode, radius));
+
+    var jres = var::object();
+    jres.set("membership", var(std::move(membership)));
+    jres.set("generators", var(std::move(generators)));
+    jres.set("modularity", var(std::move(modularity)));
+    return jres;
   }
 
   auto js_graphlets(ig::igGraph* graph, ig::igRealVec* weights, igraph_integer_t niter) {
@@ -2465,6 +2891,11 @@ namespace {
     Mu = std::make_unique<ig::igRealVec>();
 
     IGRAPH_JS_CHECK(igraph_graphlets(static_cast<igraph_t*>(*graph), static_cast<igraph_vector_t*>(*weights), static_cast<igraph_vector_int_list_t*>(*cliques), static_cast<igraph_vector_t*>(*Mu), niter));
+
+    var jres = var::object();
+    jres.set("cliques", var(std::move(cliques)));
+    jres.set("Mu", var(std::move(Mu)));
+    return jres;
   }
 
   auto js_graphlets_candidate_basis(ig::igGraph* graph, ig::igRealVec* weights) {
@@ -2475,6 +2906,11 @@ namespace {
     thresholds = std::make_unique<ig::igRealVec>();
 
     IGRAPH_JS_CHECK(igraph_graphlets_candidate_basis(static_cast<igraph_t*>(*graph), static_cast<igraph_vector_t*>(*weights), static_cast<igraph_vector_int_list_t*>(*cliques), static_cast<igraph_vector_t*>(*thresholds)));
+
+    var jres = var::object();
+    jres.set("cliques", var(std::move(cliques)));
+    jres.set("thresholds", var(std::move(thresholds)));
+    return jres;
   }
 
   auto js_graphlets_project(ig::igGraph* graph, ig::igRealVec* weights, ig::igVecIntList* cliques, ig::igRealVec* Muc, igraph_bool_t startMu, igraph_integer_t niter) {
@@ -2611,6 +3047,12 @@ namespace {
 
     
     IGRAPH_JS_CHECK(igraph_dyad_census(static_cast<igraph_t*>(*graph), &mut, &asym, &null));
+
+    var jres = var::object();
+    jres.set("mut", var(std::move(mut)));
+    jres.set("asym", var(std::move(asym)));
+    jres.set("null", var(std::move(null)));
+    return jres;
   }
 
   auto js_triad_census(ig::igGraph* graph) {
@@ -2731,6 +3173,12 @@ namespace {
     edge_map_right = std::make_unique<ig::igIntVec>();
 
     IGRAPH_JS_CHECK(igraph_union(static_cast<igraph_t*>(*res), static_cast<igraph_t*>(*left), static_cast<igraph_t*>(*right), static_cast<igraph_vector_int_t*>(*edge_map_left), static_cast<igraph_vector_int_t*>(*edge_map_right)));
+
+    var jres = var::object();
+    jres.set("res", var(std::move(res)));
+    jres.set("edge_map_left", var(std::move(edge_map_left)));
+    jres.set("edge_map_right", var(std::move(edge_map_right)));
+    return jres;
   }
 
   auto js_intersection(ig::igGraph* left, ig::igGraph* right) {
@@ -2743,6 +3191,12 @@ namespace {
     edge_map_right = std::make_unique<ig::igIntVec>();
 
     IGRAPH_JS_CHECK(igraph_intersection(static_cast<igraph_t*>(*res), static_cast<igraph_t*>(*left), static_cast<igraph_t*>(*right), static_cast<igraph_vector_int_t*>(*edge_map_left), static_cast<igraph_vector_int_t*>(*edge_map_right)));
+
+    var jres = var::object();
+    jres.set("res", var(std::move(res)));
+    jres.set("edge_map_left", var(std::move(edge_map_left)));
+    jres.set("edge_map_right", var(std::move(edge_map_right)));
+    return jres;
   }
 
   auto js_difference(ig::igGraph* orig, ig::igGraph* sub) {
@@ -2773,6 +3227,12 @@ namespace {
     edge_map2 = std::make_unique<ig::igIntVec>();
 
     IGRAPH_JS_CHECK(igraph_compose(static_cast<igraph_t*>(*res), static_cast<igraph_t*>(*g1), static_cast<igraph_t*>(*g2), static_cast<igraph_vector_int_t*>(*edge_map1), static_cast<igraph_vector_int_t*>(*edge_map2)));
+
+    var jres = var::object();
+    jres.set("res", var(std::move(res)));
+    jres.set("edge_map1", var(std::move(edge_map1)));
+    jres.set("edge_map2", var(std::move(edge_map2)));
+    return jres;
   }
 
   auto js_induced_subgraph_map(ig::igGraph* graph, igraph_vs_t vids, igraph_subgraph_implementation_t impl) {
@@ -2785,6 +3245,12 @@ namespace {
     invmap = std::make_unique<ig::igIntVec>();
 
     IGRAPH_JS_CHECK(igraph_induced_subgraph_map(static_cast<igraph_t*>(*graph), static_cast<igraph_t*>(*res), vids, impl, static_cast<igraph_vector_int_t*>(*map), static_cast<igraph_vector_int_t*>(*invmap)));
+
+    var jres = var::object();
+    jres.set("res", var(std::move(res)));
+    jres.set("map", var(std::move(map)));
+    jres.set("invmap", var(std::move(invmap)));
+    return jres;
   }
 
   auto js_gomory_hu_tree(ig::igGraph* graph, ig::igRealVec* capacity) {
@@ -2795,6 +3261,11 @@ namespace {
     flows = std::make_unique<ig::igRealVec>();
 
     IGRAPH_JS_CHECK(igraph_gomory_hu_tree(static_cast<igraph_t*>(*graph), static_cast<igraph_t*>(*tree), static_cast<igraph_vector_t*>(*flows), static_cast<igraph_vector_t*>(*capacity)));
+
+    var jres = var::object();
+    jres.set("tree", var(std::move(tree)));
+    jres.set("flows", var(std::move(flows)));
+    return jres;
   }
 
   auto js_mincut(ig::igGraph* graph, ig::igRealVec* capacity) {
@@ -2808,6 +3279,13 @@ namespace {
     cut = std::make_unique<ig::igIntVec>();
 
     IGRAPH_JS_CHECK(igraph_mincut(static_cast<igraph_t*>(*graph), &value, static_cast<igraph_vector_int_t*>(*partition1), static_cast<igraph_vector_int_t*>(*partition2), static_cast<igraph_vector_int_t*>(*cut), static_cast<igraph_vector_t*>(*capacity)));
+
+    var jres = var::object();
+    jres.set("value", var(std::move(value)));
+    jres.set("partition1", var(std::move(partition1)));
+    jres.set("partition2", var(std::move(partition2)));
+    jres.set("cut", var(std::move(cut)));
+    return jres;
   }
 
   auto js_mincut_value(ig::igGraph* graph, ig::igRealVec* capacity) {
@@ -2826,6 +3304,11 @@ namespace {
     residual_capacity = std::make_unique<ig::igRealVec>();
 
     IGRAPH_JS_CHECK(igraph_residual_graph(static_cast<igraph_t*>(*graph), static_cast<igraph_vector_t*>(*capacity), static_cast<igraph_t*>(*residual), static_cast<igraph_vector_t*>(*residual_capacity), static_cast<igraph_vector_t*>(*flow)));
+
+    var jres = var::object();
+    jres.set("residual", var(std::move(residual)));
+    jres.set("residual_capacity", var(std::move(residual_capacity)));
+    return jres;
   }
 
   auto js_reverse_residual_graph(ig::igGraph* graph, ig::igRealVec* capacity, ig::igRealVec* flow) {
@@ -2848,6 +3331,13 @@ namespace {
     partition2 = std::make_unique<ig::igIntVec>();
 
     IGRAPH_JS_CHECK(igraph_st_mincut(static_cast<igraph_t*>(*graph), &value, static_cast<igraph_vector_int_t*>(*cut), static_cast<igraph_vector_int_t*>(*partition1), static_cast<igraph_vector_int_t*>(*partition2), source, target, static_cast<igraph_vector_t*>(*capacity)));
+
+    var jres = var::object();
+    jres.set("value", var(std::move(value)));
+    jres.set("cut", var(std::move(cut)));
+    jres.set("partition1", var(std::move(partition1)));
+    jres.set("partition2", var(std::move(partition2)));
+    return jres;
   }
 
   auto js_st_mincut_value(ig::igGraph* graph, igraph_integer_t source, igraph_integer_t target, ig::igRealVec* capacity) {
@@ -2932,6 +3422,12 @@ namespace {
     leftout = std::make_unique<ig::igIntVec>();
 
     IGRAPH_JS_CHECK(igraph_dominator_tree(static_cast<igraph_t*>(*graph), root, static_cast<igraph_vector_int_t*>(*dom), static_cast<igraph_t*>(*domtree), static_cast<igraph_vector_int_t*>(*leftout), mode));
+
+    var jres = var::object();
+    jres.set("dom", var(std::move(dom)));
+    jres.set("domtree", var(std::move(domtree)));
+    jres.set("leftout", var(std::move(leftout)));
+    return jres;
   }
 
   auto js_all_st_cuts(ig::igGraph* graph, igraph_integer_t source, igraph_integer_t target) {
@@ -2942,6 +3438,11 @@ namespace {
     partition1s = std::make_unique<ig::igVecIntList>();
 
     IGRAPH_JS_CHECK(igraph_all_st_cuts(static_cast<igraph_t*>(*graph), static_cast<igraph_vector_int_list_t*>(*cuts), static_cast<igraph_vector_int_list_t*>(*partition1s), source, target));
+
+    var jres = var::object();
+    jres.set("cuts", var(std::move(cuts)));
+    jres.set("partition1s", var(std::move(partition1s)));
+    return jres;
   }
 
   auto js_all_st_mincuts(ig::igGraph* graph, igraph_integer_t source, igraph_integer_t target, ig::igRealVec* capacity) {
@@ -2953,6 +3454,12 @@ namespace {
     partition1s = std::make_unique<ig::igVecIntList>();
 
     IGRAPH_JS_CHECK(igraph_all_st_mincuts(static_cast<igraph_t*>(*graph), &value, static_cast<igraph_vector_int_list_t*>(*cuts), static_cast<igraph_vector_int_list_t*>(*partition1s), source, target, static_cast<igraph_vector_t*>(*capacity)));
+
+    var jres = var::object();
+    jres.set("value", var(std::move(value)));
+    jres.set("cuts", var(std::move(cuts)));
+    jres.set("partition1s", var(std::move(partition1s)));
+    return jres;
   }
 
   auto js_even_tarjan_reduction(ig::igGraph* graph) {
@@ -2963,6 +3470,11 @@ namespace {
     capacity = std::make_unique<ig::igRealVec>();
 
     IGRAPH_JS_CHECK(igraph_even_tarjan_reduction(static_cast<igraph_t*>(*graph), static_cast<igraph_t*>(*graphbar), static_cast<igraph_vector_t*>(*capacity)));
+
+    var jres = var::object();
+    jres.set("graphbar", var(std::move(graphbar)));
+    jres.set("capacity", var(std::move(capacity)));
+    return jres;
   }
 
   auto js_is_separator(ig::igGraph* graph, igraph_vs_t candidate) {
@@ -3011,6 +3523,13 @@ namespace {
     blockTree = std::make_unique<ig::igGraph>();
 
     IGRAPH_JS_CHECK(igraph_cohesive_blocks(static_cast<igraph_t*>(*graph), static_cast<igraph_vector_int_list_t*>(*blocks), static_cast<igraph_vector_int_t*>(*cohesion), static_cast<igraph_vector_int_t*>(*parent), static_cast<igraph_t*>(*blockTree)));
+
+    var jres = var::object();
+    jres.set("blocks", var(std::move(blocks)));
+    jres.set("cohesion", var(std::move(cohesion)));
+    jres.set("parent", var(std::move(parent)));
+    jres.set("blockTree", var(std::move(blockTree)));
+    return jres;
   }
 
   auto js_coreness(ig::igGraph* graph, igraph_neimode_t mode) {
@@ -3064,6 +3583,12 @@ namespace {
     map21 = std::make_unique<ig::igIntVec>();
 
     IGRAPH_JS_CHECK(igraph_isomorphic_vf2(static_cast<igraph_t*>(*graph1), static_cast<igraph_t*>(*graph2), static_cast<igraph_vector_int_t*>(*vertex_color1), static_cast<igraph_vector_int_t*>(*vertex_color2), static_cast<igraph_vector_int_t*>(*edge_color1), static_cast<igraph_vector_int_t*>(*edge_color2), &iso, static_cast<igraph_vector_int_t*>(*map12), static_cast<igraph_vector_int_t*>(*map21), node_compat_fn, edge_compat_fn, 0));
+
+    var jres = var::object();
+    jres.set("iso", var(std::move(iso)));
+    jres.set("map12", var(std::move(map12)));
+    jres.set("map21", var(std::move(map21)));
+    return jres;
   }
 
   auto js_count_isomorphisms_vf2(ig::igGraph* graph1, ig::igGraph* graph2, ig::igIntVec* vertex_color1, ig::igIntVec* vertex_color2, ig::igIntVec* edge_color1, ig::igIntVec* edge_color2, igraph_isocompat_t node_compat_fn, igraph_isocompat_t edge_compat_fn, void* extra) {
@@ -3100,6 +3625,12 @@ namespace {
     map21 = std::make_unique<ig::igIntVec>();
 
     IGRAPH_JS_CHECK(igraph_subisomorphic_vf2(static_cast<igraph_t*>(*graph1), static_cast<igraph_t*>(*graph2), static_cast<igraph_vector_int_t*>(*vertex_color1), static_cast<igraph_vector_int_t*>(*vertex_color2), static_cast<igraph_vector_int_t*>(*edge_color1), static_cast<igraph_vector_int_t*>(*edge_color2), &iso, static_cast<igraph_vector_int_t*>(*map12), static_cast<igraph_vector_int_t*>(*map21), node_compat_fn, edge_compat_fn, 0));
+
+    var jres = var::object();
+    jres.set("iso", var(std::move(iso)));
+    jres.set("map12", var(std::move(map12)));
+    jres.set("map21", var(std::move(map21)));
+    return jres;
   }
 
   auto js_subisomorphic_function_vf2(ig::igGraph* graph1, ig::igGraph* graph2, ig::igIntVec* vertex_color1, ig::igIntVec* vertex_color2, ig::igIntVec* edge_color1, ig::igIntVec* edge_color2, igraph_isohandler_t ishohandler_fn, igraph_isocompat_t node_compat_fn, igraph_isocompat_t edge_compat_fn, void* arg) {
@@ -3110,6 +3641,11 @@ namespace {
     map21 = std::make_unique<ig::igIntVec>();
 
     IGRAPH_JS_CHECK(igraph_subisomorphic_function_vf2(static_cast<igraph_t*>(*graph1), static_cast<igraph_t*>(*graph2), static_cast<igraph_vector_int_t*>(*vertex_color1), static_cast<igraph_vector_int_t*>(*vertex_color2), static_cast<igraph_vector_int_t*>(*edge_color1), static_cast<igraph_vector_int_t*>(*edge_color2), static_cast<igraph_vector_int_t*>(*map12), static_cast<igraph_vector_int_t*>(*map21), ishohandler_fn, node_compat_fn, edge_compat_fn, 0));
+
+    var jres = var::object();
+    jres.set("map12", var(std::move(map12)));
+    jres.set("map21", var(std::move(map21)));
+    return jres;
   }
 
   auto js_count_subisomorphisms_vf2(ig::igGraph* graph1, ig::igGraph* graph2, ig::igIntVec* vertex_color1, ig::igIntVec* vertex_color2, ig::igIntVec* edge_color1, ig::igIntVec* edge_color2, igraph_isocompat_t node_compat_fn, igraph_isocompat_t edge_compat_fn, void* extra) {
@@ -3147,6 +3683,12 @@ namespace {
     maps = std::make_unique<ig::igVecIntList>();
 
     IGRAPH_JS_CHECK(igraph_subisomorphic_lad(static_cast<igraph_t*>(*pattern), static_cast<igraph_t*>(*target), static_cast<igraph_vector_int_list_t*>(*domains), &iso, static_cast<igraph_vector_int_t*>(*map), static_cast<igraph_vector_int_list_t*>(*maps), induced, time_limit));
+
+    var jres = var::object();
+    jres.set("iso", var(std::move(iso)));
+    jres.set("map", var(std::move(map)));
+    jres.set("maps", var(std::move(maps)));
+    return jres;
   }
 
   auto js_simplify_and_colorize(ig::igGraph* graph) {
@@ -3159,6 +3701,12 @@ namespace {
     edge_color = std::make_unique<ig::igIntVec>();
 
     IGRAPH_JS_CHECK(igraph_simplify_and_colorize(static_cast<igraph_t*>(*graph), static_cast<igraph_t*>(*res), static_cast<igraph_vector_int_t*>(*vertex_color), static_cast<igraph_vector_int_t*>(*edge_color)));
+
+    var jres = var::object();
+    jres.set("res", var(std::move(res)));
+    jres.set("vertex_color", var(std::move(vertex_color)));
+    jres.set("edge_color", var(std::move(edge_color)));
+    return jres;
   }
 
   auto js_graph_count(igraph_integer_t n, igraph_bool_t directed) {
@@ -3193,6 +3741,12 @@ namespace {
     matching = std::make_unique<ig::igIntVec>();
 
     IGRAPH_JS_CHECK(igraph_maximum_bipartite_matching(static_cast<igraph_t*>(*graph), static_cast<igraph_vector_bool_t*>(*types), &matching_size, &matching_weight, static_cast<igraph_vector_int_t*>(*matching), static_cast<igraph_vector_t*>(*weights), eps));
+
+    var jres = var::object();
+    jres.set("matching_size", var(std::move(matching_size)));
+    jres.set("matching_weight", var(std::move(matching_weight)));
+    jres.set("matching", var(std::move(matching)));
+    return jres;
   }
 
   auto js_running_mean(ig::igRealVec* data, igraph_integer_t binwidth) {
@@ -3220,6 +3774,11 @@ namespace {
     resverts = std::make_unique<ig::igIntVec>();
 
     IGRAPH_JS_CHECK(igraph_convex_hull(static_cast<igraph_matrix_t*>(data), static_cast<igraph_vector_int_t*>(*resverts), static_cast<igraph_matrix_t*>(rescoords)));
+
+    var jres = var::object();
+    jres.set("resverts", var(std::move(resverts)));
+    jres.set("rescoords", var(std::move(rescoords)));
+    return jres;
   }
 
   auto js_dim_select(ig::igRealVec* sv) {
@@ -3257,6 +3816,11 @@ namespace {
 
     
     IGRAPH_JS_CHECK(igraph_is_eulerian(static_cast<igraph_t*>(*graph), &has_path, &has_cycle));
+
+    var jres = var::object();
+    jres.set("has_path", var(std::move(has_path)));
+    jres.set("has_cycle", var(std::move(has_cycle)));
+    return jres;
   }
 
   auto js_eulerian_path(ig::igGraph* graph) {
@@ -3267,6 +3831,11 @@ namespace {
     vertex_res = std::make_unique<ig::igIntVec>();
 
     IGRAPH_JS_CHECK(igraph_eulerian_path(static_cast<igraph_t*>(*graph), static_cast<igraph_vector_int_t*>(*edge_res), static_cast<igraph_vector_int_t*>(*vertex_res)));
+
+    var jres = var::object();
+    jres.set("edge_res", var(std::move(edge_res)));
+    jres.set("vertex_res", var(std::move(vertex_res)));
+    return jres;
   }
 
   auto js_eulerian_cycle(ig::igGraph* graph) {
@@ -3277,6 +3846,11 @@ namespace {
     vertex_res = std::make_unique<ig::igIntVec>();
 
     IGRAPH_JS_CHECK(igraph_eulerian_cycle(static_cast<igraph_t*>(*graph), static_cast<igraph_vector_int_t*>(*edge_res), static_cast<igraph_vector_int_t*>(*vertex_res)));
+
+    var jres = var::object();
+    jres.set("edge_res", var(std::move(edge_res)));
+    jres.set("vertex_res", var(std::move(vertex_res)));
+    return jres;
   }
 
   auto js_fundamental_cycles(ig::igGraph* graph, igraph_integer_t start, igraph_integer_t bfs_cutoff, ig::igRealVec* weights) {
@@ -3303,6 +3877,11 @@ namespace {
 
     
     IGRAPH_JS_CHECK(igraph_is_tree(static_cast<igraph_t*>(*graph), &res, &root, mode));
+
+    var jres = var::object();
+    jres.set("res", var(std::move(res)));
+    jres.set("root", var(std::move(root)));
+    return jres;
   }
 
   auto js_is_forest(ig::igGraph* graph, igraph_neimode_t mode) {
@@ -3312,6 +3891,11 @@ namespace {
     roots = std::make_unique<ig::igIntVec>();
 
     IGRAPH_JS_CHECK(igraph_is_forest(static_cast<igraph_t*>(*graph), &res, static_cast<igraph_vector_int_t*>(*roots), mode));
+
+    var jres = var::object();
+    jres.set("res", var(std::move(res)));
+    jres.set("roots", var(std::move(roots)));
+    return jres;
   }
 
   auto js_from_prufer(ig::igIntVec* prufer) {
@@ -3406,6 +3990,11 @@ namespace {
     
     
     IGRAPH_JS_CHECK(igraph_moran_process(static_cast<igraph_t*>(*graph), static_cast<igraph_vector_t*>(*weights), static_cast<igraph_vector_t*>(*quantities), static_cast<igraph_vector_int_t*>(*strategies), mode));
+
+    var jres = var::object();
+    jres.set("quantities", quantities);
+    jres.set("strategies", strategies);
+    return jres;
   }
 
   auto js_roulette_wheel_imitation(ig::igGraph* graph, igraph_integer_t vid, igraph_bool_t is_local, ig::igRealVec* quantities, ig::igIntVec* strategies, igraph_neimode_t mode) {
@@ -3432,6 +4021,12 @@ namespace {
     out = std::make_unique<ig::igRealVec>();
 
     IGRAPH_JS_CHECK(igraph_convergence_degree(static_cast<igraph_t*>(*graph), static_cast<igraph_vector_t*>(*result), static_cast<igraph_vector_t*>(*in), static_cast<igraph_vector_t*>(*out)));
+
+    var jres = var::object();
+    jres.set("result", var(std::move(result)));
+    jres.set("in", var(std::move(in)));
+    jres.set("out", var(std::move(out)));
+    return jres;
   }
 
   igraph_bool_t js_has_attribute_table() {
