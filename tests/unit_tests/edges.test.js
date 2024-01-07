@@ -18,6 +18,12 @@ describe('igraph.js', () => {
     const v1 = new igraph.vector_int([0, 1, 2]);
     expect(() => { igraph.add_edges(g, v1, 0) }).toThrow();
 
+    try {
+      igraph.add_edges(g, v1, 0);
+    } catch (e) {
+      expect(igraph.error(e)).toBe('Invalid edge vector');
+    }
+
     v1.delete();
     g.delete();
   });

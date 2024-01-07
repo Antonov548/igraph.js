@@ -12,21 +12,23 @@
         return val{typed_memory_view(size, vector.stor_begin)}; \
     }
 
-bool get_directed(const ig::igGraph& graph) {
+namespace {
+
+  bool get_directed(const ig::igGraph& graph) {
     const auto* g{static_cast<const igraph_t*>(graph)};
     return g->directed;
-}
+  }
 
-igraph_integer_t get_n(const ig::igGraph& graph) {
+  igraph_integer_t get_n(const ig::igGraph& graph) {
     const auto* g{static_cast<const igraph_t*>(graph)};
     return g->n;
-}
+  }
 
-var get_vector(const ig::igIntVec& v) {
+  var get_vector(const ig::igIntVec& v) {
     return var{typed_memory_view(v.size(), v.begin())};
-}
+  }
 
-ig::igIntVec create_vector(var arr) {
+  ig::igIntVec create_vector(var arr) {
     ig::igIntVec v{};
     const auto data{convertJSArrayToNumberVector<igraph_integer_t>(arr)};
 
@@ -34,6 +36,12 @@ ig::igIntVec create_vector(var arr) {
     for (size_t i{0}; i < data.size(); ++i) v[i] = data[i];
 
     return v;
+  }
+
+  std::string error(std::uintptr_t p) {
+    return reinterpret_cast<ig::igException*>(p)->what();
+  }
+
 }
 
 IGRAPH_VECTOR_EMCC(from)
@@ -65,4 +73,6 @@ EMSCRIPTEN_BINDINGS(IGraphTypes)
     value("IN", IGRAPH_STAR_IN).
     value("UNDIRECTED", IGRAPH_STAR_UNDIRECTED).
     value("MUTUAL", IGRAPH_STAR_MUTUAL);
+
+  function("error", &error);
 }
