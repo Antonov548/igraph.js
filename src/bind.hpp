@@ -14,5 +14,5 @@
     using var = emscripten::val;
     using namespace emscripten;
 #else
-    #error "Emscripten defien not found: emcc compiler should be used"
+    #error "Emscripten define not found: emcc compiler should be used"
 #endif
