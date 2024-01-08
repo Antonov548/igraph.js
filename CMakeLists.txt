@@ -17,6 +17,11 @@ set(IGRAPH_INTEGER_SIZE 32)
 add_subdirectory(vendor/igraph)
 add_subdirectory(vendor/igraph-cpp)
 
+execute_process(
+  COMMAND git apply ${CMAKE_CURRENT_SOURCE_DIR}/cmake/igraph.patch
+  WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/vendor/igraph
+)
+
 add_subdirectory(src)
 
 if (ENABLE_TESTS)

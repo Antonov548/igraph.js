@@ -1,0 +1,17 @@
+diff --git a/src/core/error.c b/src/core/error.c
+index 6e928cc00..9abfc693c 100644
+--- a/src/core/error.c
++++ b/src/core/error.c
+@@ -169,9 +169,9 @@ igraph_error_t igraph_error(const char *reason, const char *file, int line,
+ 
+     if (igraph_i_error_handler) {
+         igraph_i_error_handler(reason, file, line, igraph_errno);
+-#ifndef USING_R
+-    }  else {
+-        igraph_error_handler_abort(reason, file, line, igraph_errno);
++#if !defined(USING_R) && !defined(__EMSCRIPTEN__)
++        }  else {
++            igraph_error_handler_abort(reason, file, line, igraph_errno);
+ #endif
+     }
+     return igraph_errno;
